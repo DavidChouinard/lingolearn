@@ -22,6 +22,18 @@ import cscie99.team2.lingolearn.error.CardNotFoundException;
  * period of time, it will be removed from the cache. 
  */
 public class DeckManager {
+	/**
+	 * This tuple pairs the values that get cached by the DeckManager.
+	 */
+	private class ManagerTuple {
+		public final Card card;
+		public final Date date;
+		public ManagerTuple(Card card, Date date) {
+			this.card = card;
+			this.date = date;
+		}
+	}
+	
 	// Singleton
 	private static DeckManager instance = null;
 	
@@ -30,17 +42,9 @@ public class DeckManager {
 	// Time (in seconds) after which a card will be removed from the active cache
 	private final static int PERIODIC_CHECK_TIME = 1;
 	
-	
-	private Map<String, Card> cardMap =
-			new HashMap<String, Card>();	// Defines Map of the card objects in the active cache
-											// Card Id is a unique key, non-case sensitive;
-											// The key is stored in lower case.
-	
-	private HashMap<String, Date> lastAccessMap =
-			new HashMap <String, Date>();	// Defines Map of the Card last access time
-											// Card Id is a unique key, non-case sensitive;
-											// The key is stored in lower case.
-	
+	// This HashMap acts as the actual case of the cards
+	private Map<String, ManagerTuple> cache  = new HashMap<String, ManagerTuple>();
+
 	/**
 	 * Default Singleton Constructor
 	 */
@@ -120,44 +124,26 @@ public class DeckManager {
 	}
 	
 	/**
-	 * This method returns a Card object from the local cache if it is already
-	 * there or retrieves it from the data store and place it in the local cache.
-	 * Each time the Card is requested, the access time stamp is updated so
-	 * non-frequently used cards will be deleted by CacheCleaner.  
+	 * Get the card indicated from either the data store or the local cache.  
 	 * 
-	 * @param cardId					CardId of the Card
-	 * @return							Requested Card Object 
-	 * @throws CardNotFoundException	If the Card can not be located in the local cache or in the Datastore
+	 * @param uid The unique identifier of the card, this will be used as is 
+	 * to check to see if the card exists in the cache.
+	 * @return The card that was requested. 
+	 * @throws CardNotFoundException Is thrown if the card cannot be found in
+	 * the data store or local cache.
 	 */
-	public Card getCard (String cardId) throws CardNotFoundException {
-		Card myCard = null;
-		cardId = cardId.toLowerCase();
-		// check the card cache, if the card is not already there,
-		// retrieve it from the data store
-		if (cardMap.get(cardId) == null) {
-			// TODO
-			// Temporary placeholder only.
-			// Retrieve the card from the Datastore;
-			// Process errors and throw exceptions..
-			myCard = new Card();
-			// Update cardMap. The key is converted to the lower case
-			cardMap.put(cardId, myCard);
-		} else {
-			// Card is in the local cache
-			myCard = cardMap.get(cardId);
+	public Card getCard (String uid) throws CardNotFoundException {
+		// Is the card not in the cache?
+		if (!cache.containsKey(uid)) {
+			
+			// TODO Get the card from the data store
+			
 		}
-		// update last access time
-		updateAccessTime(cardId);
-
-		return myCard;
+		// Update the access time
+		ManagerTuple tuple = cache.get(uid);
+		cache.put(uid, new ManagerTuple(tuple.card, new Date()));
+		// Return the card
+		return tuple.card;
 	} 
-	
-	/**
-	 * Helper method to update the last access time of the card in the cache  
-	 * @param cardId
-	 */
-	private void updateAccessTime (String cardId) {
-		// TODO
-	}
 }
 

@@ -4,17 +4,14 @@
 package cscie99.team2.lingolearn.error;
 
 /**
- * @author YPolyanskyy
- *
+ * This exception should be thrown when a card cannot be found.
  */
 @SuppressWarnings("serial")
 public class CardNotFoundException extends Exception {
-
 	/**
-	 * Default no argument constructor
-	 * @param msg Message to display when the exception gets thrown
+	 * Constructor, note the exception reason.
 	 */
-	CardNotFoundException () {
-		super ("Card retrieval problem has occured.");
-	}	
+	public CardNotFoundException(String message) {
+		super(message);
+	}
 }
