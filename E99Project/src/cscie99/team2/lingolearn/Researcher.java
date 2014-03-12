@@ -24,4 +24,18 @@ public class Researcher extends User {
 	public void exportRawData() {
 		
 	}
+	
+	/**
+	 * This method exports a filtered list of data
+	 */
+	public void exportFilteredData() {
+		
+	}
+	
+	/**
+	 * This method filters the dataset based on a set of criteria.
+	 */
+	public void filterData() {
+		
+	}
 }
