@@ -1,7 +1,7 @@
 /**
  * CSCIE99 TEAM 2
  */
-package cscie99.team2.lingolearn;
+package cscie99.team2.lingolearn.error;
 
 /**
  * @author YPolyanskyy
@@ -16,7 +16,5 @@ public class CardNotFoundException extends Exception {
 	 */
 	CardNotFoundException () {
 		super ("Card retrieval problem has occured.");
-	}
-	
-	
+	}	
 }

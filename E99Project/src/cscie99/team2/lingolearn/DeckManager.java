@@ -12,6 +12,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import cscie99.team2.lingolearn.error.CardNotFoundException;
+
 /**
  * The purpose of this class is to improve the performance of the system while 
  * retrieving the cards from the data store. This class maintains a list of 
@@ -119,19 +121,19 @@ public class DeckManager {
 	
 	/**
 	 * This method returns a Card object from the local cache if it is already
-	 * there or retrieves it from the Datastore and place it in the local cache.
-	 * Each time the Card is requested, the access time stap is updated so
+	 * there or retrieves it from the data store and place it in the local cache.
+	 * Each time the Card is requested, the access time stamp is updated so
 	 * non-frequently used cards will be deleted by CacheCleaner.  
 	 * 
 	 * @param cardId					CardId of the Card
 	 * @return							Requested Card Object 
 	 * @throws CardNotFoundException	If the Card can not be located in the local cache or in the Datastore
 	 */
-	private Card getCard (String cardId) throws CardNotFoundException {
+	public Card getCard (String cardId) throws CardNotFoundException {
 		Card myCard = null;
 		cardId = cardId.toLowerCase();
 		// check the card cache, if the card is not already there,
-		// retrieve it from the datastore
+		// retrieve it from the data store
 		if (cardMap.get(cardId) == null) {
 			// TODO
 			// Temporary placeholder only.
