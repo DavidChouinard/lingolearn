@@ -3,9 +3,10 @@
  */
 package cscie99.team2.lingolearn;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -22,57 +23,6 @@ import cscie99.team2.lingolearn.error.CardNotFoundException;
  * period of time, it will be removed from the cache. 
  */
 public class DeckManager {
-	/**
-	 * This tuple pairs the values that get cached by the DeckManager.
-	 */
-	private class ManagerTuple {
-		public final Card card;
-		public final Date date;
-		public ManagerTuple(Card card, Date date) {
-			this.card = card;
-			this.date = date;
-		}
-	}
-	
-	// Singleton
-	private static DeckManager instance = null;
-	
-	// Time (in seconds) after which a card will be removed from the active cache
-	private final static int CACHE_INACTIVITY_TIME = 1;
-	// Time (in seconds) after which a card will be removed from the active cache
-	private final static int PERIODIC_CHECK_TIME = 1;
-	
-	// This HashMap acts as the actual case of the cards
-	private Map<String, ManagerTuple> cache  = new HashMap<String, ManagerTuple>();
-
-	/**
-	 * Default Singleton Constructor
-	 */
-	private DeckManager() {
-		// Initialize once only for periodical purging of the stale Card objects from the cache
-		RunCacheCleaner();
-	}
-
-	/**
-	 * Get an instance of the DeckManager.
-	 */
-	public static DeckManager getInstance() {
-		if (instance == null) {
-			instance = new DeckManager();
-		}
-		return instance;
-	}
-	
-	/**
-	 * This method utilizes the ScheduledExecutorService in order to periodically run
-	 * the CacheCleaner process with the interval set by PERIODIC_CHECK_TIME.
-	 * 
-	 */
-	private void RunCacheCleaner() {
-		ScheduledThreadPoolExecutor executor = new CustomScheduledThreadPoolExecutor(1);
-		executor.scheduleWithFixedDelay(new CacheCleaner(), 1, CACHE_INACTIVITY_TIME, TimeUnit.SECONDS);
-	}
-
 	/**
 	 * The standard ScheduledThreadPoolExecutor is customized here so it would be possible
 	 * to process any Exceptions in the runnable task by overriding
@@ -110,17 +60,70 @@ public class DeckManager {
 
 		}
 	}
-	
+
 	/**
-	 * This method iterates through the lastAccessMap entries and deletes any stale records
-	 * along with the corresponding Card objects from the cardMap if CACHE_INACTIVITY_TIME expires.
-	 *
+	 * This method iterates through the cache and removes any objects that
+	 * have an access time that exceeds CACHE_INACTIVITY_TIME.
 	 */
 	private class CacheCleaner implements Runnable {
-		//@Override
+		@Override
 		public void run() {
-			// TODO
+			Calendar now = Calendar.getInstance();
+			Set<String> keys = cache.keySet(); 
+			for (String key : keys) {
+				// Check to see if the time for the current item will be before
+				// the current time once the inactivity window is applied
+				Calendar card = cache.get(key).date;
+				card.add(Calendar.SECOND, CACHE_INACTIVITY_TIME);
+				// The time is in the past, so remove the item from the cache
+				if (card.before(now)) {
+					cache.remove(key);
+				}				
+			}
 		}
+	}
+	
+	/**
+	 * This tuple pairs the values that get cached	 by the DeckManager.
+	 */
+	private class ManagerTuple {
+		public final Card card;
+		public final Calendar date;
+		public ManagerTuple(Card card, Calendar date) {
+			this.card = card;
+			this.date = date;
+		}
+	}
+	
+	// Singleton
+	private static DeckManager instance = null;
+	
+	// The time, in seconds, that a card can be in the cache before removal 
+	private final static int CACHE_INACTIVITY_TIME = 60;
+	
+	// The time, in seconds, when the cache is checked for inactivity
+	private final static int PERIODIC_CHECK_TIME = 15;
+	
+	// This HashMap acts as the actual case of the cards
+	private Map<String, ManagerTuple> cache  = new HashMap<String, ManagerTuple>();
+
+	/**
+	 * Default Singleton Constructor
+	 */
+	private DeckManager() {
+		// Schedule the cleaner thread to run 
+		ScheduledThreadPoolExecutor executor = new CustomScheduledThreadPoolExecutor(1);
+		executor.scheduleWithFixedDelay(new CacheCleaner(), 1, PERIODIC_CHECK_TIME, TimeUnit.SECONDS);
+	}
+
+	/**
+	 * Get an instance of the DeckManager.
+	 */
+	public static DeckManager getInstance() {
+		if (instance == null) {
+			instance = new DeckManager();
+		}
+		return instance;
 	}
 	
 	/**
@@ -141,7 +144,7 @@ public class DeckManager {
 		}
 		// Update the access time
 		ManagerTuple tuple = cache.get(uid);
-		cache.put(uid, new ManagerTuple(tuple.card, new Date()));
+		cache.put(uid, new ManagerTuple(tuple.card, Calendar.getInstance()));
 		// Return the card
 		return tuple.card;
 	} 
