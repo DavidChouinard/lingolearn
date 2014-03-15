@@ -21,4 +21,25 @@ public class Card {
 	private Image  			image;			// Image
 	private Sound  			sound;			// Sound
 	private List<Confuser>	confuserList;	// List of "confusers"
+	
+	public Card(String id) {
+		this.cardId = id;
+	}
+	
+	public void setKanji(String kanji) {
+		this.kanji = kanji;
+	}
+	
+	public String getKanji() {
+		return this.kanji;
+	}
+	
+	public void setImage(Image img) {
+		this.image = img;
+	}
+	
+	public Image getImage() {
+		return this.image;
+	}
+	
 }

@@ -11,4 +11,14 @@ package cscie99.team2.lingolearn;
 public class Image {
 
 	private String imageId;		// Location of the image file in the datastore
+	private String imageUri;
+	
+	public Image(String id, String uri) {
+		this.imageId = id;
+		this.imageUri = uri;
+	}
+	
+	public String getImageUri() {
+		return this.imageUri;
+	}
 }
