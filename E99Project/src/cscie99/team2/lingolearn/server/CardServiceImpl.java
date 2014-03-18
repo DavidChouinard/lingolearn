@@ -15,7 +15,7 @@ public class CardServiceImpl extends RemoteServiceServlet implements CardService
 		Card c = new Card();
 		c.setId(cardId);
 		
-		c.setKanji("岡");
+		c.setKanji("岡"); 
 		c.setTranslation("something");
 		
 		String imgId = "1";
