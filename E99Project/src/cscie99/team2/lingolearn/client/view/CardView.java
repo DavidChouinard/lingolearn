@@ -78,7 +78,7 @@ public class CardView extends Composite {
 	  this.kanji.add(tb1);
 	  
 	  HTML tb2 = new HTML();
-	  tb2.setText(card.getTranslation());
+	  tb2.setText(card.getEnTranslation());
 	  this.englishTranslation.add(tb2);
 	  
   }
