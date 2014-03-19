@@ -1,0 +1,45 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic);
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: url('/images/white_texture.png');
+}
+
+
+#appPreloader {
+  background-image: url(loader.gif);
+  height: 20px;
+  width: 220px;
+}
+
+/*
+ * Header
+ */
+
+.navbar-brand {
+  font-weight: 300;
+}
+
+.kanji {
+  font-size: 8em;
+  font-family: sans-serif;  /* TODO */
+}
+
+.card {
+  margin: 50px auto 20px;
+  max-width: 600px;
+  text-align: center;
+  border: 1px solid #d3d3d3;
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+  background: #FFFFFF;
+  padding: 60px 0;
+}
+
+.card button {
+  margin-top: 20px;
+}
+
+.translation {
+  font-size: 5em;
+}
+
