@@ -1,7 +1,4 @@
-/**
- * CSCIE99 TEAM 2
- */
-package cscie99.team2.lingolearn.shared;
+package cscie99.team2.lingolearn.server;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -13,6 +10,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import cscie99.team2.lingolearn.shared.Card;
 import cscie99.team2.lingolearn.shared.error.CardNotFoundException;
 
 /**
@@ -29,35 +27,36 @@ public class DeckManager {
 	 * afterEcecure(r,t)
 	 */
 	private class CustomScheduledThreadPoolExecutor extends ScheduledThreadPoolExecutor {
-		// Default Constructor
+		/**
+		 * Constructor.
+		 */
 		public CustomScheduledThreadPoolExecutor(int corePoolSize) {
 			super(corePoolSize);
 		}
 
 		@Override
-		public void afterExecute(Runnable r, Throwable t) {
-			super.afterExecute(r, t);
-		    if (t == null && r instanceof Future<?>) {
-		        try {
-		          Future<?> future = (Future<?>) r;
-		          if (future.isDone())
-		            future.get();
-		        } catch (CancellationException ce) {
-		            t = ce;
-		        } catch (ExecutionException ee) {
-		            t = ee.getCause();
-		        } catch (InterruptedException ie) {
-		            Thread.currentThread().interrupt();
-		        }
-		      }
-			if (t != null) {
-				// Exception occurred, forward to handler
-				System.err.println("!!! Error occured while processing Card cache entries: " + t);
-				// TODO
-				// Periodic cache clean is not running anymore at this point.
-				// Try to recover somehow?
+		public void afterExecute(Runnable runnable, Throwable throwable) {
+			super.afterExecute(runnable, throwable);
+			if (throwable == null && runnable instanceof Future<?>) {
+				try {
+					Future<?> future = (Future<?>) runnable;
+					if (future.isDone())
+						future.get();
+				} catch (CancellationException ex) {
+					throwable = ex;
+				} catch (ExecutionException ex) {
+					throwable = ex.getCause();
+				} catch (InterruptedException ex) {
+					Thread.currentThread().interrupt();
+				}
 			}
+			if (throwable != null) {
+				// Exception occurred, forward to handler
+				System.err.println("Error occured while processing Card cache entries: " + throwable);
 
+				// TODO Periodic cache clean is not running anymore at this point, try to recover somehow?
+
+			}
 		}
 	}
 
