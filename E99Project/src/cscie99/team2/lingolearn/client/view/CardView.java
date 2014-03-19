@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardView extends Composite {
-  
+  private FlowPanel card_container;
   private FlowPanel card;
   private FlowPanel front;
   private FlowPanel back;
@@ -34,18 +34,22 @@ public class CardView extends Composite {
   private Button flipButton;
   
   public CardView() {
+	  this.card_container = new FlowPanel();
+	  this.card_container.setStyleName("card-container");
+	  initWidget(this.card_container);
+	  
 	  this.card = new FlowPanel();
 	  this.card.setStyleName("card");
-	  initWidget(this.card);
+	  this.card_container.add(this.card);
 	  
 	  this.front = new FlowPanel();
-	  this.front.setStyleName("frontOfCard");
+	  this.front.setStyleName("card-front");
 	  this.card.add(this.front);
-	  this.back = new FlowPanel();
-	  this.front.setStyleName("backOfCard");
-	  this.back.setVisible(false);
-	  this.card.add(this.back);
 	  
+	  this.back = new FlowPanel();
+	  this.back.setStyleName("card-back");
+	 // this.back.setVisible(false);
+	  this.card.add(this.back);
 	  
 	  this.kanji = new FlowPanel();
 	  this.kanji.setStyleName("kanji");
@@ -55,15 +59,19 @@ public class CardView extends Composite {
 	  this.hirigana.setStyleName("hirigana");
 	  this.front.add(this.hirigana);
 	  
+	  this.flipButton = new Button();
+	  this.flipButton.setText("Flip");
+	  this.flipButton.setStyleName("btn btn-default btn-lg");
+	  this.front.add(flipButton);
+	  
 	  this.englishTranslation = new FlowPanel();
 	  this.englishTranslation.setStyleName("translation");
 	  this.back.add(this.englishTranslation);
 	  
-	  this.flipButton = new Button();
-	  this.flipButton.setText("Flip");
-	  this.flipButton.setStyleName("btn btn-default btn-lg");
-	  this.card.add(flipButton);
-	  
+//	  this.flipButton = new Button();
+//	  this.flipButton.setText("Flip");
+//	  this.flipButton.setStyleName("btn btn-default btn-lg");
+//	  this.back.add(flipButton);
   }
   
   public HasClickHandlers getFlipButton() {
@@ -85,8 +93,10 @@ public class CardView extends Composite {
   }
   
   public void flipCard() {
-	  this.front.setVisible(this.front.isVisible() ? false : true);
-	  this.back.setVisible(this.back.isVisible() ? false : true);
+	  if (this.card_container.getStyleName().contains("card-flipped"))
+		  this.card_container.removeStyleName("card-flipped");
+	  else
+		  this.card_container.addStyleName("card-flipped");
   }
   
   public Widget asWidget() {
