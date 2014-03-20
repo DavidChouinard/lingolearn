@@ -4,7 +4,6 @@
 
   <ui:style>
   .mainContainer {
-    
   }
 
   .containerItem {
@@ -31,7 +30,7 @@
 	  	<div class='{style.courses}' ui:field='coursesAsInstructor'></div>
 	  </div>
 	  <div class='{style.containerItem}'>
-	  	<g:Button ui:field='sampleCardButton'>View sample card</g:Button>
+      <g:Button ui:field='sampleCardButton' addStyleNames='btn'>View sample card</g:Button>
 	  </div>
 	</g:HTMLPanel>
 
