@@ -16,6 +16,16 @@
     <url-pattern>/lingolearn/cardService</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>courseServlet</servlet-name>
+    <servlet-class>cscie99.team2.lingolearn.server.CourseServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>courseServlet</servlet-name>
+    <url-pattern>/lingolearn/courseService</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>app.html</welcome-file>

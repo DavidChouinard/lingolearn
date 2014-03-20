@@ -67,11 +67,6 @@ public class CardView extends Composite {
 	  this.englishTranslation = new FlowPanel();
 	  this.englishTranslation.setStyleName("translation");
 	  this.back.add(this.englishTranslation);
-	  
-//	  this.flipButton = new Button();
-//	  this.flipButton.setText("Flip");
-//	  this.flipButton.setStyleName("btn btn-default btn-lg");
-//	  this.back.add(flipButton);
   }
   
   public HasClickHandlers getFlipButton() {

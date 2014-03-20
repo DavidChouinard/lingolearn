@@ -9,3 +9,6 @@
 */web-app/gwt
 */web-app/WEB-INF/classes
 target
+/war/lingolearn
+/war/WEB-INF/deploy
+/war/WEB-INF/lib
