@@ -3,6 +3,7 @@
  */
 package cscie99.team2.lingolearn.shared;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,14 +13,14 @@ import java.util.List;
  *	Required for implementation of Student, Instructor and Researcher.
  *
  */
-public abstract class User {
+public class User implements Serializable {
 	
-	private final String	uId = null;		// Unique system wide user Id
+	private String	uId = null;		// Unique system wide user Id
     private String   		uPass,			// Hashed password
            					uFirstName,		// First name
            				 	uLastName,		// Last name
            				 	uEmail;			// Email address
-	private final int 		uYOB = 0;		// Year of birth. Will be used to calculate user's age
+	private int 		uYOB = 0;		// Year of birth. Will be used to calculate user's age
 	private int 			uYearsTeachExp;	// Years of language teaching experience 
 	private Gender 			uGender;		// Gender
 	private List<Role> 	 	uRole;			// List of Roles that assigned to this user. Default: RESEARCHER

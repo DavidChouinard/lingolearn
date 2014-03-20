@@ -3,8 +3,10 @@ package cscie99.team2.lingolearn.client;
 import cscie99.team2.lingolearn.client.event.ViewCardEvent;
 import cscie99.team2.lingolearn.client.event.ViewCardEventHandler;
 import cscie99.team2.lingolearn.client.presenter.CardPresenter;
+import cscie99.team2.lingolearn.client.presenter.HomePresenter;
 import cscie99.team2.lingolearn.client.presenter.Presenter;
 import cscie99.team2.lingolearn.client.view.CardView;
+import cscie99.team2.lingolearn.client.view.HomeView;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -15,11 +17,13 @@ import com.google.gwt.user.client.ui.HasWidgets;
 public class AppController implements Presenter, ValueChangeHandler<String> {
   private final HandlerManager eventBus;
   private final CardServiceAsync cardService; 
+  private final CourseServiceAsync courseService;
   private HasWidgets container;
   
-  public AppController(CardServiceAsync cardService, HandlerManager eventBus) {
+  public AppController(CourseServiceAsync courseService, CardServiceAsync cardService, HandlerManager eventBus) {
     this.eventBus = eventBus;
     this.cardService = cardService;
+    this.courseService = courseService;
     bind();
   }
   
@@ -29,13 +33,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     eventBus.addHandler(ViewCardEvent.TYPE,
         new ViewCardEventHandler() {
           public void onViewCard(ViewCardEvent event) {
-            doAddNewContact();
+            doViewCard();
           }
         });  
 
   }
   
-  private void doAddNewContact() {
+  private void doViewCard() {
     History.newItem("viewCard");
   }
   
@@ -43,8 +47,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     this.container = container;
     
     if ("".equals(History.getToken())) {
-      //History.newItem("home");
-      History.newItem("viewCard");
+      History.newItem("home");
     }
     else {
       History.fireCurrentHistoryState();
@@ -57,8 +60,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     if (token != null) {
       Presenter presenter = null;
 
-      if (token.equals("viewCard")) {
-        presenter = new CardPresenter(cardService, eventBus, new CardView());
+      switch (token) {
+      
+      case "viewCard": 
+    	  presenter = new CardPresenter(cardService, eventBus, new CardView());
+    	  break;
+      case "home":
+    	  presenter = new HomePresenter(courseService, eventBus, new HomeView());
+    	  break;
       }
       
       if (presenter != null) {

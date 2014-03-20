@@ -3,6 +3,7 @@
  */
 package cscie99.team2.lingolearn.shared;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,11 +12,20 @@ import java.util.Date;
  * This class represents a study course created by users of the system.
  * 
  */
-public class Course {
+public class Course implements Serializable {
 	
 	private String courseId,	// Unique course Id
-				   courseDesc;	// Course description
+				   courseDesc,	// Course description
+				   courseName;  // Course name
 	Date 	       courseStart,	// Course start date
 				   courseEnd;	// Course end date
+	
+	public void setName(String name) {
+		this.courseName = name;
+	}
+	
+	public String getName() {
+		return this.courseName;
+	}
 				   
 }

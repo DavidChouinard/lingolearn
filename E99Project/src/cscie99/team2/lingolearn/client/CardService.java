@@ -10,5 +10,4 @@ import java.util.ArrayList;
 @RemoteServiceRelativePath("cardService")
 public interface CardService extends RemoteService {
 	public Card getCardById(String cardId);
-	
 }
