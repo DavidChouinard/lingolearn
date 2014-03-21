@@ -9,14 +9,15 @@ import cscie99.team2.lingolearn.shared.error.SpacedRepetitionException;
  * This factory returns objects that implement the SpacedRepetition interface.
  */
 public class SpacedRepetitionFactory {
-	
+	// The error message to use when there is an error creating the spaced
+	// repetition object.
 	private final static String ERROR_MESSAGE = "An error occured creating the object of type ";
 	
 	/**
+	 * Get a spaced repetition object of the type provided.
 	 * 
-	 * @param name
-	 * @return
-	 * @throws SpacedRepetitionException 
+	 * @param name The name of the spaced repetition technique.
+	 * @return A space repetition object for use.
 	 */
 	public static SpacedRepetition getSpacedRepetition(String name) throws SpacedRepetitionException {
 		try {

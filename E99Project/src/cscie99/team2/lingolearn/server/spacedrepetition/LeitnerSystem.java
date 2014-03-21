@@ -5,4 +5,10 @@ package cscie99.team2.lingolearn.server.spacedrepetition;
  */
 public class LeitnerSystem implements SpacedRepetition {
 
+	@Override
+	public int DrawCard() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
