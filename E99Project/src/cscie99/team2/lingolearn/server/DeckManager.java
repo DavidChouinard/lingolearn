@@ -68,8 +68,8 @@ public class DeckManager {
 		@Override
 		public void run() {
 			Calendar now = Calendar.getInstance();
-			Set<String> keys = cache.keySet(); 
-			for (String key : keys) {
+			Set<Integer> keys = cache.keySet(); 
+			for (int key : keys) {
 				// Check to see if the time for the current item will be before
 				// the current time once the inactivity window is applied
 				Calendar card = cache.get(key).date;
@@ -104,7 +104,7 @@ public class DeckManager {
 	private final static int PERIODIC_CHECK_TIME = 15;
 	
 	// This HashMap acts as the actual case of the cards
-	private Map<String, ManagerTuple> cache  = new HashMap<String, ManagerTuple>();
+	private Map<Integer, ManagerTuple> cache  = new HashMap<Integer, ManagerTuple>();
 
 	/**
 	 * Default Singleton Constructor
@@ -128,22 +128,21 @@ public class DeckManager {
 	/**
 	 * Get the card indicated from either the data store or the local cache.  
 	 * 
-	 * @param uid The unique identifier of the card, this will be used as is 
-	 * to check to see if the card exists in the cache.
+	 * @param id The id of the card as it exists in the database.
 	 * @return The card that was requested. 
 	 * @throws CardNotFoundException Is thrown if the card cannot be found in
 	 * the data store or local cache.
 	 */
-	public Card getCard (String uid) throws CardNotFoundException {
+	public Card getCard(int id) throws CardNotFoundException {
 		// Is the card not in the cache?
-		if (!cache.containsKey(uid)) {
+		if (!cache.containsKey(id)) {
 			
 			// TODO Get the card from the data store
 			
 		}
 		// Update the access time
-		ManagerTuple tuple = cache.get(uid);
-		cache.put(uid, new ManagerTuple(tuple.card, Calendar.getInstance()));
+		ManagerTuple tuple = cache.get(id);
+		cache.put(id, new ManagerTuple(tuple.card, Calendar.getInstance()));
 		// Return the card
 		return tuple.card;
 	} 
