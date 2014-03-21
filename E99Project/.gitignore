@@ -12,3 +12,4 @@ target
 /war/lingolearn
 /war/WEB-INF/deploy
 /war/WEB-INF/lib
+/.settings/**
