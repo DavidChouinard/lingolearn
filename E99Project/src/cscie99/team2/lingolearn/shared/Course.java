@@ -27,5 +27,9 @@ public class Course implements Serializable {
 	public String getName() {
 		return this.courseName;
 	}
+	
+	public String getCourseId() {
+		return courseId;
+	}
 				   
 }

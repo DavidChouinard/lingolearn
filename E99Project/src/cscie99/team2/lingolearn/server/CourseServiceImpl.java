@@ -10,6 +10,8 @@ import cscie99.team2.lingolearn.server.datastore.CardDAO;
 import cscie99.team2.lingolearn.shared.Card;
 import cscie99.team2.lingolearn.shared.Course;
 import cscie99.team2.lingolearn.shared.Image;
+import cscie99.team2.lingolearn.shared.Lesson;
+import cscie99.team2.lingolearn.shared.Session;
 import cscie99.team2.lingolearn.shared.User;
 
 @SuppressWarnings("serial")
@@ -46,7 +48,7 @@ public class CourseServiceImpl extends RemoteServiceServlet implements CourseSer
 
 
 	@Override
-	public Course getCourseById(Long id) {
+	public Course getCourseById(String id) {
 		//Stub
 		Course c;
 		
@@ -55,6 +57,16 @@ public class CourseServiceImpl extends RemoteServiceServlet implements CourseSer
 		c = new Course();
 		c.setName("Difficult course");
 		return c;
+	}
+
+
+	@Override
+	public ArrayList<Session> getSessionsForCourse(String courseId) {
+		// TODO Auto-generated method stub
+		Lesson l = new Lesson();
+		ArrayList<Session> s = new ArrayList<Session>();
+		s.add(l);
+		return s;
 	}
 
 }

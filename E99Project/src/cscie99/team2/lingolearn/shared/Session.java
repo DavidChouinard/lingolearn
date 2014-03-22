@@ -3,6 +3,7 @@
  */
 package cscie99.team2.lingolearn.shared;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -12,7 +13,7 @@ import java.util.Date;
  * This abstract class represents Session of the system. It defines common elements of all sessions.
  * Required for implementation of Lesson, Quiz, Test.
  */
-public abstract class Session {
+public abstract class Session implements Serializable {
 
 	private String sessId;		// Session Id
 	private Date   sessStart,	// Timestamp of the session's start

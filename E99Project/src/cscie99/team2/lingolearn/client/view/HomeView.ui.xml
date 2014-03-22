@@ -24,11 +24,11 @@
 	<g:HTMLPanel styleName='{style.mainContainer}'>
 	  <div class='{style.containerItem}'>
 	  	<div class='{style.title}'>Instructing...</div>
-	  	<div class='{style.courses}' ui:field='coursesAsStudent'></div>
+	  	<g:VerticalPanel ui:field='coursesAsStudent'></g:VerticalPanel>
 	  </div>
 	  <div class='{style.containerItem}'>
 	  	<div class='{style.title}'>Enrolled in...</div>
-	  	<div class='{style.courses}' ui:field='coursesAsInstructor'></div>
+	  	<g:VerticalPanel ui:field='coursesAsInstructor'></g:VerticalPanel>
 	  </div>
 	  <div class='{style.containerItem}'>
 	  	<g:Button ui:field='sampleCardButton'>View sample card</g:Button>

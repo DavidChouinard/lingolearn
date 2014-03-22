@@ -2,6 +2,8 @@ package cscie99.team2.lingolearn.client;
 
 import cscie99.team2.lingolearn.client.event.ViewCardEvent;
 import cscie99.team2.lingolearn.client.event.ViewCardEventHandler;
+import cscie99.team2.lingolearn.client.event.ViewCourseEvent;
+import cscie99.team2.lingolearn.client.event.ViewCourseEventHandler;
 import cscie99.team2.lingolearn.client.presenter.CardPresenter;
 import cscie99.team2.lingolearn.client.presenter.CoursePresenter;
 import cscie99.team2.lingolearn.client.presenter.HomePresenter;
@@ -9,6 +11,7 @@ import cscie99.team2.lingolearn.client.presenter.Presenter;
 import cscie99.team2.lingolearn.client.view.CardView;
 import cscie99.team2.lingolearn.client.view.CourseView;
 import cscie99.team2.lingolearn.client.view.HomeView;
+import cscie99.team2.lingolearn.shared.Course;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -38,11 +41,25 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
             doViewCard();
           }
         });  
+    
+    eventBus.addHandler(ViewCourseEvent.TYPE,
+        new ViewCourseEventHandler() {
+          public void onViewCourse(ViewCourseEvent event) {
+            doViewCourse(event.getCourse());
+          }
+        });  
 
   }
   
   private void doViewCard() {
     History.newItem("viewCard");
+  }
+  
+  private void doViewCourse(Course course) {
+    History.newItem("viewCourse", false);
+    System.out.println(course.getName());
+    Presenter presenter = new CoursePresenter(courseService, eventBus, new CourseView(), course);
+    presenter.go(container);
   }
   
   public void go(final HasWidgets container) {

@@ -7,9 +7,11 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.dom.client.Element;
 
@@ -20,8 +22,8 @@ public class HomeView extends Composite {
   interface Binder extends UiBinder<Widget, HomeView> { }
   private static final Binder binder = GWT.create(Binder.class);
 
-  @UiField Element coursesAsStudent;
-  @UiField Element coursesAsInstructor;
+  @UiField VerticalPanel coursesAsStudent;
+  @UiField VerticalPanel coursesAsInstructor;
   @UiField Button sampleCardButton;
   
   public HomeView() {
@@ -32,18 +34,19 @@ public class HomeView extends Composite {
 	  return sampleCardButton;
   }
 
-  public void setCoursesUserIsInstructing(ArrayList<Course> courses) {
-	  this.populateCourseList(this.coursesAsInstructor, courses);
+  public HasClickHandlers addCourseUserIsInstructing(Course course) {
+	  return this.addCourseLink(this.coursesAsInstructor, course);
   }
   
-  public void setCoursesUserIsEnrolledIn(ArrayList<Course> courses) {
-	  this.populateCourseList(this.coursesAsStudent, courses);
+  public HasClickHandlers addCourseUserIsEnrolledIn(Course course) {
+	  return this.addCourseLink(this.coursesAsStudent, course);
   }
   
-  private void populateCourseList(Element courseContainer, ArrayList<Course> courses) {
-	  for (int i=0;i<courses.size();i++) {
-		  courseContainer.setInnerHTML("<a href='#viewCourse'>" + courses.get(i).getName() + "</a>");
-	  }
+  private HasClickHandlers addCourseLink(VerticalPanel panel, Course course) {
+	  Anchor a = new Anchor();
+	  a.setText(course.getName());
+	  panel.add(a);
+	  return a;
   }
   
   public Widget asWidget() {

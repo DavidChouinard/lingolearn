@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.dom.client.Element;
 
 import cscie99.team2.lingolearn.shared.Course;
+import cscie99.team2.lingolearn.shared.Session;
 
 public class CourseView extends Composite {
   
@@ -30,6 +31,10 @@ public class CourseView extends Composite {
 
   public void setCourseData(Course course) {
 	  this.courseTitle.setInnerHTML(course.getName());
+  }
+  
+  public void setAssignmentList(ArrayList<Session> sessions) {
+	  this.assignments.setInnerHTML("hey");
   }
   
   public Widget asWidget() {
