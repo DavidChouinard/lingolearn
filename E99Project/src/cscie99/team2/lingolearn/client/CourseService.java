@@ -11,4 +11,6 @@ import cscie99.team2.lingolearn.shared.User;
 @RemoteServiceRelativePath("courseService")
 public interface CourseService extends RemoteService {
 	public ArrayList<Course> getCoursesUserIsInstructing(User user);
+	public ArrayList<Course> getCoursesUserIsEnrolledIn(User user);
+	public Course getCourseById(Long id);
 }

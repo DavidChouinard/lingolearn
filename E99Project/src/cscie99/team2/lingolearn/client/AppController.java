@@ -3,9 +3,11 @@ package cscie99.team2.lingolearn.client;
 import cscie99.team2.lingolearn.client.event.ViewCardEvent;
 import cscie99.team2.lingolearn.client.event.ViewCardEventHandler;
 import cscie99.team2.lingolearn.client.presenter.CardPresenter;
+import cscie99.team2.lingolearn.client.presenter.CoursePresenter;
 import cscie99.team2.lingolearn.client.presenter.HomePresenter;
 import cscie99.team2.lingolearn.client.presenter.Presenter;
 import cscie99.team2.lingolearn.client.view.CardView;
+import cscie99.team2.lingolearn.client.view.CourseView;
 import cscie99.team2.lingolearn.client.view.HomeView;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -67,6 +69,9 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     	  break;
       case "home":
     	  presenter = new HomePresenter(courseService, eventBus, new HomeView());
+    	  break;
+      case "viewCourse":
+    	  presenter = new CoursePresenter(courseService, eventBus, new CourseView());
     	  break;
       }
       

@@ -1,0 +1,35 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:mail='urn:import:cscie99.team2.lingolearn.client.view'>
+
+  <ui:style>
+  .mainContainer {
+    
+  }
+
+  .containerItem {
+    border-bottom: 1px solid #666;
+    padding: 1em;
+  }
+
+  .title {
+    font-size: 1.5em;
+  }
+
+  .courses {
+	font-style: italic;
+  }
+  </ui:style>
+
+	<g:HTMLPanel styleName='{style.mainContainer}'>
+	  <div class='{style.containerItem}'>
+	  	<div class='{style.title}' ui:field='courseTitle'></div>
+	  </div>
+	  <div class='{style.containerItem}'>
+	  	<div class='{style.title}'>Assignments</div>
+	  	<div class='{style.courses}' ui:field='assignments'></div>
+	  </div>
+	</g:HTMLPanel>
+
+
+</ui:UiBinder>

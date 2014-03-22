@@ -28,5 +28,33 @@ public class CourseServiceImpl extends RemoteServiceServlet implements CourseSer
 		return list;
 		
 	}
+	
+	
+	public ArrayList<Course> getCoursesUserIsEnrolledIn(User user) {
+		ArrayList<Course> list = new ArrayList<Course>();
+		Course c;
+		
+		
+		//Temporarily prepopulate
+		c = new Course();
+		c.setName("Difficult course");
+		list.add(c);
+		
+		return list;
+		
+	}
+
+
+	@Override
+	public Course getCourseById(Long id) {
+		//Stub
+		Course c;
+		
+		
+		//Temporarily prepopulate
+		c = new Course();
+		c.setName("Difficult course");
+		return c;
+	}
 
 }

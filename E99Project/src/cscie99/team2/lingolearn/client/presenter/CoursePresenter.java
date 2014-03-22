@@ -3,7 +3,8 @@ package cscie99.team2.lingolearn.client.presenter;
 
 import cscie99.team2.lingolearn.client.CourseServiceAsync;
 import cscie99.team2.lingolearn.client.event.ViewCardEvent;
-import cscie99.team2.lingolearn.client.view.HomeView;
+import cscie99.team2.lingolearn.client.view.CourseView;
+import cscie99.team2.lingolearn.shared.Card;
 import cscie99.team2.lingolearn.shared.Course;
 import cscie99.team2.lingolearn.shared.User;
 
@@ -19,25 +20,19 @@ import com.google.gwt.user.client.ui.Widget;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePresenter implements Presenter {  
+public class CoursePresenter implements Presenter {  
 
   private final HandlerManager eventBus;
-  private final HomeView display;
+  private final CourseView display;
   private final CourseServiceAsync courseService;
   
-  public HomePresenter(CourseServiceAsync courseService, HandlerManager eventBus, HomeView display) {
+  public CoursePresenter(CourseServiceAsync courseService, HandlerManager eventBus, CourseView display) {
     this.courseService = courseService;
 	  this.eventBus = eventBus;
       this.display = display;
   }
   
   public void bind() {
-    
-	display.getSampleCardButton().addClickHandler(new ClickHandler() {   
-      public void onClick(ClickEvent event) {
-        eventBus.fireEvent(new ViewCardEvent());
-      }
-    });
     
   }
   
@@ -50,19 +45,9 @@ public class HomePresenter implements Presenter {
   
   private void populateUserCourseInfo() {
 	  //TODO: use UserService to get user info
-	  courseService.getCoursesUserIsInstructing(new User(),  new AsyncCallback<ArrayList<Course>>() {
-		  public void onSuccess(ArrayList<Course> courses) {
-	          display.setCoursesUserIsInstructing(courses);
-	      }
-	      
-	      public void onFailure(Throwable caught) {
-	        Window.alert("Error fetching contact details");
-	      }
-	  });
-	  
-	  courseService.getCoursesUserIsEnrolledIn(new User(),  new AsyncCallback<ArrayList<Course>>() {
-		  public void onSuccess(ArrayList<Course> courses) {
-	          display.setCoursesUserIsEnrolledIn(courses);
+	  courseService.getCourseById((long) 1,  new AsyncCallback<Course>() {
+		  public void onSuccess(Course course) {
+	          display.setCourseData(course);
 	      }
 	      
 	      public void onFailure(Throwable caught) {

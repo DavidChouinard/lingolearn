@@ -42,7 +42,7 @@ public class HomeView extends Composite {
   
   private void populateCourseList(Element courseContainer, ArrayList<Course> courses) {
 	  for (int i=0;i<courses.size();i++) {
-		  courseContainer.setInnerHTML("<a href='#viewCard'>" + courses.get(i).getName() + "</a>");
+		  courseContainer.setInnerHTML("<a href='#viewCourse'>" + courses.get(i).getName() + "</a>");
 	  }
   }
   

@@ -9,5 +9,7 @@ import cscie99.team2.lingolearn.shared.User;
 
 public interface CourseServiceAsync {
   public void getCoursesUserIsInstructing(User user, AsyncCallback<ArrayList<Course>> callback);
+  public void getCoursesUserIsEnrolledIn(User user, AsyncCallback<ArrayList<Course>> callback);
+  public void getCourseById(Long id, AsyncCallback<Course> callback);
 }
 
