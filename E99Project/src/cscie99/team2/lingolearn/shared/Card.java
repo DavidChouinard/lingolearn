@@ -1,9 +1,11 @@
 package cscie99.team2.lingolearn.shared;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class Card {
+public class Card implements Serializable {
 
 	private int id;				// Unique card Id
 	private String kanji;			// Kanji Unicode
