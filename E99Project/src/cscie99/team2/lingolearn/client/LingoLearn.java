@@ -5,10 +5,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import cscie99.team2.lingolearn.client.AppController;
-import cscie99.team2.lingolearn.client.CardService;
-import cscie99.team2.lingolearn.client.CardServiceAsync;
-
 public class LingoLearn implements EntryPoint {
 
 	@Override

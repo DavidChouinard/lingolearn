@@ -1,10 +1,14 @@
 /**
  * CSCIE99 TEAM 2
  */
-package cscie99.team2.lingolearn.shared;
+package cscie99.team2.lingolearn.server;
 
 import java.io.Serializable;
 import java.util.List;
+
+import cscie99.team2.lingolearn.shared.Gender;
+import cscie99.team2.lingolearn.shared.Language;
+import cscie99.team2.lingolearn.shared.Role;
 
 /**
  * @author YPolyanskyy

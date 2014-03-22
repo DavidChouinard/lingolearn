@@ -4,13 +4,8 @@ import java.util.ArrayList;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import cscie99.team2.lingolearn.client.CardService;
 import cscie99.team2.lingolearn.client.CourseService;
-import cscie99.team2.lingolearn.server.datastore.CardDAO;
-import cscie99.team2.lingolearn.shared.Card;
 import cscie99.team2.lingolearn.shared.Course;
-import cscie99.team2.lingolearn.shared.Image;
-import cscie99.team2.lingolearn.shared.User;
 
 @SuppressWarnings("serial")
 public class CourseServiceImpl extends RemoteServiceServlet implements CourseService {
@@ -27,6 +22,13 @@ public class CourseServiceImpl extends RemoteServiceServlet implements CourseSer
 		
 		return list;
 		
+	}
+
+	@Override
+	public ArrayList<Course> getCoursesUserIsInstructing(
+			cscie99.team2.lingolearn.client.User user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

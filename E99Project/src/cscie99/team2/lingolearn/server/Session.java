@@ -1,11 +1,12 @@
 /**
  * CSCIE99 TEAM 2
  */
-package cscie99.team2.lingolearn.shared;
+package cscie99.team2.lingolearn.server;
 
 import java.util.Date;
 
-import cscie99.team2.lingolearn.server.Deck;
+import cscie99.team2.lingolearn.shared.Course;
+
 
 /**
  * @author YPolyanskyy

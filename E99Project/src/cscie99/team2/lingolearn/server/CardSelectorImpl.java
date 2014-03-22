@@ -1,9 +1,10 @@
 /**
  * CSCIE99 TEAM 2
  */
-package cscie99.team2.lingolearn.shared;
+package cscie99.team2.lingolearn.server;
 
-import cscie99.team2.lingolearn.server.Deck;
+import cscie99.team2.lingolearn.shared.Card;
+
 
 /**
  * @author YPolyanskyy

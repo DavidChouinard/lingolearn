@@ -1,10 +1,7 @@
 package cscie99.team2.lingolearn.server.datastore;
 
 import static cscie99.team2.lingolearn.server.datastore.OfyService.ofy;
-import cscie99.team2.lingolearn.server.datastore.ObjectifyableCard;
-import cscie99.team2.lingolearn.server.datastore.ObjectifyableImage;
 import cscie99.team2.lingolearn.shared.Card;
-import cscie99.team2.lingolearn.shared.Image;
 
 public class CardDAO {
 

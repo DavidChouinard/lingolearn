@@ -1,24 +1,19 @@
 package cscie99.team2.lingolearn.client.presenter;
 
-
-import cscie99.team2.lingolearn.client.CourseServiceAsync;
-import cscie99.team2.lingolearn.client.event.ViewCardEvent;
-import cscie99.team2.lingolearn.client.view.HomeView;
-import cscie99.team2.lingolearn.shared.Card;
-import cscie99.team2.lingolearn.shared.Course;
-import cscie99.team2.lingolearn.shared.User;
+import java.util.ArrayList;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.Widget;
 
-import java.util.ArrayList;
-import java.util.List;
+import cscie99.team2.lingolearn.client.CourseServiceAsync;
+import cscie99.team2.lingolearn.client.event.ViewCardEvent;
+import cscie99.team2.lingolearn.client.view.HomeView;
+import cscie99.team2.lingolearn.client.User;
+import cscie99.team2.lingolearn.shared.Course;
 
 public class HomePresenter implements Presenter {  
 
