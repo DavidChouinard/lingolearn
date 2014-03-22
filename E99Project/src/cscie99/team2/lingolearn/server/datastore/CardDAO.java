@@ -25,8 +25,31 @@ public class CardDAO {
 		return card;	
 	}
 	
+	/**
+	 * Obtains first available kanji in the datastore
+	 * @param kanji in as the search parameter
+	 * @return Card with the 
+	 */
 	public Card getCardByKanji(String kanji) {
 		ObjectifyableCard oCard = ofy().load().type(ObjectifyableCard.class).filter("kanji", kanji).first().now();
+		Card card = oCard.getCard();
+		return card;
+	}
+
+	public Card getCardByHiragana(String hiragana) {
+		ObjectifyableCard oCard = ofy().load().type(ObjectifyableCard.class).filter("hiragana", hiragana).first().safe();
+		Card card = oCard.getCard();
+		return card;
+	}
+	
+	public Card getCardByKatakana(String katakana) {
+		ObjectifyableCard oCard = ofy().load().type(ObjectifyableCard.class).filter("katakana", katakana).first().safe();
+		Card card = oCard.getCard();
+		return card;
+	}
+	
+	public Card getCardByTranslation(String translation) {
+		ObjectifyableCard oCard = ofy().load().type(ObjectifyableCard.class).filter("transation", translation).first().safe();
 		Card card = oCard.getCard();
 		return card;
 	}
