@@ -11,8 +11,31 @@ import java.io.Serializable;
  * This class represents Sound, corresponding to the individual card.
  */
 public class Sound implements Serializable {
+	private static final long serialVersionUID = -4086241020207666390L;
 	
-	private String soundId;		// Location of the sound file in the datastore
+	private Long soundId;		
+	private String soundUri;	// Location of the sound file in the datastore
 	
 	public Sound() {}
+
+	public Sound(String uri) {
+		this.soundId = (long) 5;
+		this.soundUri = uri;
+	}
+	
+	public String getSoundUri() {
+		return this.soundUri;
+	}
+	
+	public Long getSoundId() {
+		return this.soundId;
+	}
+
+	public void setSoundUri(String soundUri) {
+		this.soundUri = soundUri;
+	}
+	
+	public void setSoundId(Long id) {
+		this.soundId = id;
+	}
 }

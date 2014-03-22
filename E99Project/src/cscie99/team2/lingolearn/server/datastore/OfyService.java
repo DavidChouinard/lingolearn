@@ -19,6 +19,7 @@ public class OfyService {
 	static {
 		factory().register(ObjectifyableCard.class);
 		factory().register(ObjectifyableImage.class);
+		factory().register(ObjectifyableSound.class);
 		// factory().register(OtherClass.class);
 	}
 
