@@ -25,6 +25,7 @@ public class HomeView extends Composite {
   @UiField VerticalPanel coursesAsStudent;
   @UiField VerticalPanel coursesAsInstructor;
   @UiField Button sampleCardButton;
+  @UiField Element userName;
   
   public HomeView() {
 	  initWidget(binder.createAndBindUi(this));
@@ -47,6 +48,10 @@ public class HomeView extends Composite {
 	  a.setText(course.getName());
 	  panel.add(a);
 	  return a;
+  }
+  
+  public void setUserName(String name) {
+	  this.userName.setInnerHTML(name);
   }
   
   public Widget asWidget() {

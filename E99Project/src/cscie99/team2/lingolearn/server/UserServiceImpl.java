@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import cscie99.team2.lingolearn.client.UserService;
-import cscie99.team2.lingolearn.server.datastore.ObjectifyableUser;
+import cscie99.team2.lingolearn.shared.User;
 import cscie99.team2.lingolearn.server.datastore.UserDAO;
 
 public class UserServiceImpl  extends RemoteServiceServlet implements UserService {
@@ -28,10 +28,10 @@ public class UserServiceImpl  extends RemoteServiceServlet implements UserServic
 		if( sessionUser == null )
 			return false;
 		
-		if( !(sessionUser instanceof ObjectifyableUser) )
+		if( !(sessionUser instanceof User) )
 			return false;
 		
-		ObjectifyableUser loggedInUser = (ObjectifyableUser) sessionUser;
+		User loggedInUser = (User) sessionUser;
 		if( loggedInUser.getGmail().equals("") )
 			return false;
 		
@@ -50,7 +50,7 @@ public class UserServiceImpl  extends RemoteServiceServlet implements UserServic
 		
 		//TODO:: add exception handling, e.g. db error
 		UserDAO udao = UserDAO.getInstance();
-		ObjectifyableUser loggedInUser = udao.getUserByGmail(gmail);
+		User loggedInUser = udao.getUserByGmail(gmail);
 		
 		return loggedInUser != null;
 	}
@@ -62,7 +62,7 @@ public class UserServiceImpl  extends RemoteServiceServlet implements UserServic
 	 * @return Boolean - true if the user was successfully logged
 	 * out, false otherwise.
 	 */
-	public Boolean logoutUser( ObjectifyableUser user ){
+	public Boolean logoutUser( User user ){
 		try{
 			HttpSession session = this.getThreadLocalRequest().getSession();
 			session.setAttribute(USER_SESSION_KEY, null);
@@ -80,7 +80,7 @@ public class UserServiceImpl  extends RemoteServiceServlet implements UserServic
 	 * @return User - the user that is currently logged into this
 	 * session.
 	 */
-	public ObjectifyableUser getCurrentUser(){
+	public User getCurrentUser(){
 		
 		//TODO this should throw an exception
 		if( !isUserLoggedIn() )
@@ -94,10 +94,10 @@ public class UserServiceImpl  extends RemoteServiceServlet implements UserServic
 			return null;
 		
 		//TODO this should throw an exception
-		if( !(sessionUser instanceof ObjectifyableUser) )
+		if( !(sessionUser instanceof User) )
 			return null;
 		
-		ObjectifyableUser currentUser = (ObjectifyableUser) sessionUser;
+		User currentUser = (User) sessionUser;
 		return currentUser;
 	}
 	

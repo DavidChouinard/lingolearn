@@ -21,12 +21,15 @@ import com.google.gwt.user.client.ui.HasWidgets;
 
 public class AppController implements Presenter, ValueChangeHandler<String> {
   private final HandlerManager eventBus;
+  private final UserServiceAsync userService;
   private final CardServiceAsync cardService; 
   private final CourseServiceAsync courseService;
   private HasWidgets container;
   
-  public AppController(CourseServiceAsync courseService, CardServiceAsync cardService, HandlerManager eventBus) {
+  public AppController(UserServiceAsync userService, CourseServiceAsync courseService,
+		  CardServiceAsync cardService, HandlerManager eventBus) {
     this.eventBus = eventBus;
+    this.userService = userService;
     this.cardService = cardService;
     this.courseService = courseService;
     bind();
@@ -85,7 +88,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     	  presenter = new CardPresenter(cardService, eventBus, new CardView());
     	  break;
       case "home":
-    	  presenter = new HomePresenter(courseService, eventBus, new HomeView());
+    	  presenter = new HomePresenter(userService, courseService, eventBus, new HomeView());
     	  break;
       case "viewCourse":
     	  presenter = new CoursePresenter(courseService, eventBus, new CourseView());

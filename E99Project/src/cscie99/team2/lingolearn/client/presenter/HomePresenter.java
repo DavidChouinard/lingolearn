@@ -2,6 +2,7 @@ package cscie99.team2.lingolearn.client.presenter;
 
 
 import cscie99.team2.lingolearn.client.CourseServiceAsync;
+import cscie99.team2.lingolearn.client.UserServiceAsync;
 import cscie99.team2.lingolearn.client.event.ViewCardEvent;
 import cscie99.team2.lingolearn.client.event.ViewCourseEvent;
 import cscie99.team2.lingolearn.client.view.HomeView;
@@ -25,9 +26,12 @@ public class HomePresenter implements Presenter {
   private final HandlerManager eventBus;
   private final HomeView display;
   private final CourseServiceAsync courseService;
+  private final UserServiceAsync userService;
   
-  public HomePresenter(CourseServiceAsync courseService, HandlerManager eventBus, HomeView display) {
-    this.courseService = courseService;
+  public HomePresenter(UserServiceAsync userService, 
+		  CourseServiceAsync courseService, HandlerManager eventBus, HomeView display) {
+	  this.userService = userService;
+      this.courseService = courseService;
 	  this.eventBus = eventBus;
       this.display = display;
   }
@@ -62,7 +66,18 @@ public class HomePresenter implements Presenter {
   
   
   private void populateUserCourseInfo() {
-	  //TODO: use UserService to get user info
+	  
+	  userService.getCurrentUser(new AsyncCallback<User>() {
+		  public void onSuccess(User user) {
+			  if (user instanceof User) {
+				  display.setUserName(user.getFirstName());
+			  }
+		  }
+		  public void onFailure(Throwable caught) {
+			  Window.alert("Error getting current user");
+		  }
+	  });
+	  
 	  courseService.getCoursesUserIsInstructing(new User(),  new AsyncCallback<ArrayList<Course>>() {
 		  public void onSuccess(ArrayList<Course> courses) {
 			  for (int i=0;i<courses.size();i++) {

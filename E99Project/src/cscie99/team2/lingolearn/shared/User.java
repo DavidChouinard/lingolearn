@@ -1,76 +1,105 @@
-/**
- * CSCIE99 TEAM 2
- */
 package cscie99.team2.lingolearn.shared;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * @author YPolyanskyy
- * 
- *	This abstract class represents users of the system. It defines common elements of all users.
- *	Required for implementation of Student, Instructor and Researcher.
- *
- */
+
+
+import cscie99.team2.lingolearn.shared.Gender;
+import cscie99.team2.lingolearn.shared.Language;
+
+
+
 public class User implements Serializable {
+
+	private static final long serialVersionUID = 4690764038062275542L;
+
+	String gplusId;					// id from google +
+			
+	String gmail;
+	String firstName;
+	String lastName;
+	Gender gender;
+	Language nativeLanguage;
+	Set<Language> languages;
 	
-	private String	uId = null;		// Unique system wide user Id
-    private String   		uPass,			// Hashed password
-           					uFirstName,		// First name
-           				 	uLastName,		// Last name
-           				 	uEmail;			// Email address
-	private int 		uYOB = 0;		// Year of birth. Will be used to calculate user's age
-	private int 			uYearsTeachExp;	// Years of language teaching experience 
-	private Gender 			uGender;		// Gender
-	private List<Role> 	 	uRole;			// List of Roles that assigned to this user. Default: RESEARCHER
-	private List<Language> 	uLangSpoken;	// List of languages the user can speak. Native language should be listed first.
-	private List<Session>	uSessionRec;	// 
-	
-	
-	/**
-	 * This method performs user login
-	 * 
-	 * @param uId		unique user Id
-	 * @param uPass		hashed user password
-	 * @return			true if login attempt was successful
-	 */
-	public boolean login (String uId, String uPass) {
-		boolean loginResult = false;
-		
-		return loginResult;
+	public User(){
+		this.languages = new HashSet<Language>();
 	}
 	
-	/**
-	 * This method performs user logout
-	 * 
-	 * @param uId		unique user Id
-	 * @param uPass		hashed user password
-	 * @return			true if login attempt was successful
-	 */
-	public boolean logout (String uId, String uPass) {
-		boolean logoutResult = false;
+	public User( String gplusId, String gmail, String fname,
+							String lname, Gender gender, Language nativ ){
+		this.gplusId = gplusId;
+		this.gmail = gmail;
+		this.firstName = fname;
+		this.lastName = lname;
+		this.gender = gender;
+		this.nativeLanguage = nativ;
+		this.languages = new HashSet<Language>();
 		
-		return logoutResult;
+		addLanguage(nativ);
 	}
 	
-	/**
-	 * This method allows users to upload files in the Anki flashcard format. After the file is uploaded,
-	 * it will parse the file and allow user to matches uploaded data to data model of the system's flash cards
-	 * 
-	 * @param filename	File in Anki format to be imported
-	 */
-	public void loadAnkiFile(String filename) {
-		
+	public boolean addLanguage( Language lang ){
+		return languages.add(lang);
+	}
+
+	public String getGplusId() {
+		return gplusId;
+	}
+
+	public void setGplusId(String gplusId) {
+		this.gplusId = gplusId;
+	}
+
+	public String getGmail() {
+		return gmail;
+	}
+
+	public void setGmail(String gmail) {
+		this.gmail = gmail;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	public Language getNativeLanguage() {
+		return nativeLanguage;
+	}
+
+	public void setNativeLanguage(Language nativeLanguage) {
+		this.nativeLanguage = nativeLanguage;
+	}
+
+	public Set<Language> getLanguages() {
+		return languages;
+	}
+
+	public void setLanguages(Set<Language> languages) {
+		this.languages = languages;
 	}
 	
-	/**
-	 * This method allows users to upload files in the plain CSV format. After the file is uploaded,
-	 * it will parse the file and allow user to matches uploaded data to data model of the system's flash cards
-	 * 
-	 * @param filename	File in the CSV format (with headers) to be imported
-	 */
-	public void loadFlatFile(String filename) {
-		
-	}
+	
 }

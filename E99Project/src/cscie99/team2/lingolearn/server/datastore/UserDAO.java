@@ -1,5 +1,6 @@
 package cscie99.team2.lingolearn.server.datastore;
 
+import cscie99.team2.lingolearn.shared.User;
 
 public class UserDAO {
 
@@ -16,11 +17,12 @@ public class UserDAO {
 		return instance;
 	}
 	
-	public ObjectifyableUser getUserByGmail( String gmail ){
+	public User getUserByGmail( String gmail ){
 		
-		ObjectifyableUser u = new ObjectifyableUser();
-		u.gmail = "test@gmail.com";
-		u.gplusId = "12343243134143134134";
+		User u = new User();
+		u.setGmail("test@gmail.com");
+		u.setGplusId("12343243134143134134");
+		u.setFirstName("Mufasa");
 		
 		return u;
 	}

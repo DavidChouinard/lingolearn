@@ -14,10 +14,11 @@ public class LingoLearn implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 		//Set up controller / event manager
+		UserServiceAsync userService = GWT.create(UserService.class);
 		CourseServiceAsync courseService = GWT.create(CourseService.class);
 		CardServiceAsync cardService = GWT.create(CardService.class);
 	    HandlerManager eventBus = new HandlerManager(null);
-	    AppController appViewer = new AppController(courseService, cardService, eventBus);
+	    AppController appViewer = new AppController(userService, courseService, cardService, eventBus);
 	    
 	    //Clear loading screen
 	    RootPanel.get("content").clear(true);
