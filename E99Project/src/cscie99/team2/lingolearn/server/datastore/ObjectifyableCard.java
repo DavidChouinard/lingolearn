@@ -21,7 +21,7 @@ public class ObjectifyableCard implements Serializable {
 
 	private static final long serialVersionUID = -5054129063681784845L;
 	
-	@Id private int cardId;				// Unique card Id
+	@Id private Long cardId;				// Unique card Id
 	@Index private String kanji;			// Kanji Unicode
 	@Index private String enTranslation;	// English translation
 	@Load Ref<ObjectifyableImage> image;					// Image

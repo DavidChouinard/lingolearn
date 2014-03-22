@@ -14,10 +14,10 @@ public class Deck {
 	private int id;
 	
 	// The map of cards that are part of this deck
-	private HashMap<Integer, Card> cards;
+	private HashMap<Long, Card> cards;
 
 	// The ids of the cards that are part of this deck
-	private List<Integer> cardIds;
+	private List<Long> cardIds;
 		
 	// The language of this deck
 	private String language;
@@ -32,7 +32,7 @@ public class Deck {
 		this.id = id;
 		this.language = language;
 		this.nativeLangauge = nativeLanguage;
-		this.cards = new HashMap<Integer, Card>();
+		this.cards = new HashMap<Long, Card>();
 		for (Card card : cards) {
 			this.cards.put(card.getId(), card);
 		}
@@ -53,7 +53,7 @@ public class Deck {
 	/**
 	 * Get the card with the id indicated.
 	 */
-	public Card getCard(int id) throws CardNotFoundException {
+	public Card getCard(Long id) throws CardNotFoundException {
 		// Is this card part of the deck?
 		if (!cardIds.contains(id)) {
 			throw new CardNotFoundException("The card with the id " + id + " is not part of this deck.");
@@ -71,7 +71,7 @@ public class Deck {
 	/**
 	 * Get the id of the cards that are part of this deck.
 	 */
-	public List<Integer> getCardIds() {
+	public List<Long> getCardIds() {
 		return cardIds;
 	}
 	

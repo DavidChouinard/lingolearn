@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class Card  implements Serializable  {
 
-	private int id;				// Unique card Id
+	private Long id;				// Unique card Id
 	private String kanji;			// Kanji Unicode
 	private	String hiragana;				// Hiragana Unicode
 	private	String katakana;				// Katakana Unicode
@@ -22,11 +22,11 @@ public class Card  implements Serializable  {
 		this.enTranslation = enTranslation;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int cardId) {
+	public void setId(Long cardId) {
 		this.id = cardId;
 	}
 
