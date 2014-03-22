@@ -5,7 +5,6 @@ package cscie99.team2.lingolearn.shared;
 
 import java.util.Date;
 
-import cscie99.team2.lingolearn.server.Deck;
 
 /**
  * @author YPolyanskyy

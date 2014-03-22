@@ -1,9 +1,9 @@
-package cscie99.team2.lingolearn.server;
+package cscie99.team2.lingolearn.shared;
 
 import java.util.HashMap;
 import java.util.List;
 
-import cscie99.team2.lingolearn.shared.Card;
+import cscie99.team2.lingolearn.server.DeckManager;
 import cscie99.team2.lingolearn.shared.error.CardNotFoundException;
 
 /**
@@ -63,10 +63,9 @@ public class Deck {
 			return cards.get(id);
 		}
 		// Get the card and make sure we keep a local copy
-		DeckManager manager = DeckManager.getInstance();
-		Card card = manager.getCard(id);
-		cards.put(id, card);
-		return card;
+
+		// TODO Get the card from the data layer
+		throw new CardNotFoundException("TODO Get the card");
 	}
 	
 	/**

@@ -3,7 +3,6 @@
  */
 package cscie99.team2.lingolearn.shared;
 
-import cscie99.team2.lingolearn.server.Deck;
 
 /**
  * @author YPolyanskyy
