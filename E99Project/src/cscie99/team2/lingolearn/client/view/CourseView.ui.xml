@@ -3,33 +3,21 @@
   xmlns:mail='urn:import:cscie99.team2.lingolearn.client.view'>
 
   <ui:style>
-  .mainContainer {
-    
-  }
-
-  .containerItem {
-    border-bottom: 1px solid #666;
-    padding: 1em;
-  }
-
-  .title {
-    font-size: 1.5em;
-  }
-
-  .courses {
-	font-style: italic;
-  }
+    .courses {
+      font-style: italic;
+    }
   </ui:style>
 
-	<g:HTMLPanel styleName='{style.mainContainer}'>
-	  <div class='{style.containerItem}'>
-	  	<div class='{style.title}' ui:field='courseTitle'></div>
-	  </div>
-	  <div class='{style.containerItem}'>
-	  	<div class='{style.title}'>Assignments</div>
-	  	<div class='{style.courses}' ui:field='assignments'></div>
-	  </div>
-	</g:HTMLPanel>
+  <g:HTMLPanel>
+    <h2 ui:field='courseTitle'></h2>
 
+    <div class='panel panel-default'>
+      <div class='panel-heading'>Assignments</div>
+      <div class='panel-body'>
+        <div class='{style.courses}' ui:field='assignments'></div>
+      </div>
+    </div>
+
+  </g:HTMLPanel>
 
 </ui:UiBinder>
