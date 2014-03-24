@@ -5,7 +5,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import cscie99.team2.lingolearn.shared.Card;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @RemoteServiceRelativePath("cardService")
 public interface CardService extends RemoteService {
@@ -15,4 +15,5 @@ public interface CardService extends RemoteService {
 	public Card getCardByKatakana(String katakana);
 	public Card getCardByTranslation(String translation);
 	public Card getCardByDescription(String desc);
+	public List<Card> getAllCardsByKanji(String kanji);
 }

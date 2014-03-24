@@ -1,5 +1,8 @@
 package cscie99.team2.lingolearn.server;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import cscie99.team2.lingolearn.client.CardService;
@@ -126,5 +129,15 @@ public class CardServiceImpl extends RemoteServiceServlet implements CardService
 		}
 		return c;
 	};
+	public List<Card> getAllCardsByKanji(String kanji) {
+		List<Card> cards = new ArrayList<>();
+		try {
+			cards = cardAccessor.getAllCardsByKanji(kanji);
+		} catch (CardNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cards;
+	}
 	
 }

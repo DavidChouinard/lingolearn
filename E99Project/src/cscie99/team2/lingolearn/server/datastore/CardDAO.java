@@ -1,10 +1,13 @@
 package cscie99.team2.lingolearn.server.datastore;
 
 import static cscie99.team2.lingolearn.server.datastore.OfyService.ofy;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import cscie99.team2.lingolearn.server.datastore.ObjectifyableCard;
-import cscie99.team2.lingolearn.server.datastore.ObjectifyableImage;
 import cscie99.team2.lingolearn.shared.Card;
-import cscie99.team2.lingolearn.shared.Image;
 import cscie99.team2.lingolearn.shared.error.CardNotFoundException;
 
 public class CardDAO {
@@ -122,4 +125,24 @@ public class CardDAO {
 			return card;}
 	}
 
+	/**
+	 * Obtains list of all available cards with specified kanji in the datastore
+	 * @param kanji
+	 * @return List of all Cards in the datastore containing the same kanji
+	 * @throws CardNotFoundException 
+	 */
+	public List<Card> getAllCardsByKanji(String kanji) throws CardNotFoundException
+	{
+		List<ObjectifyableCard> oCards = ofy().load().type(ObjectifyableCard.class).filter("kanji", kanji).list();
+		Iterator<ObjectifyableCard> it = oCards.iterator();
+		List<Card> cards = new ArrayList<>();
+		while (it.hasNext()) {
+			cards.add(it.next().getCard());
+		}
+		if (cards.size() == 0) {
+			throw new CardNotFoundException("Cards were not found in the datastore.");
+		} else {
+			return cards;
+		}
+	}
 }
