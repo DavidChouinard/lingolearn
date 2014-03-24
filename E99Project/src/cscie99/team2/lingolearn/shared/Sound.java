@@ -18,11 +18,6 @@ public class Sound implements Serializable {
 	
 	public Sound() {}
 
-	public Sound(String uri) {
-		this.soundId = (long) 5;
-		this.soundUri = uri;
-	}
-	
 	public String getSoundUri() {
 		return this.soundUri;
 	}

@@ -29,6 +29,7 @@ public class ObjectifyableCard implements Serializable {
 	@Index private	String katakana;		// Katakana Unicode
 	@Index private String translation; 		// Translation
 	@Index private String nativeLanguage;	// Native language of the translation, example "en-us";
+	@Index private String description;		// Card's description
 	@Load Ref<ObjectifyableImage> image;	// Image
 	@Load Ref<ObjectifyableSound> sound;	// Sound
 	
@@ -46,6 +47,7 @@ public class ObjectifyableCard implements Serializable {
 		this.katakana = card.getKatakana();
 		this.translation = card.getTranslation();
 		this.nativeLanguage = card.getNativeLanguage();
+		this.description = card.getDesc();
 		
 		// Process image
 		Image img = card.getImage();
@@ -75,6 +77,7 @@ public class ObjectifyableCard implements Serializable {
 		c.setKatakana(this.katakana);
 		c.setTranslation(this.translation);
 		c.setNativeLanguage(this.nativeLanguage);
+		c.setDesc(this.description);
 		c.setImage(this.image.get().getImage());
 		c.setSound(this.sound.get().getSound());
 		return c;
