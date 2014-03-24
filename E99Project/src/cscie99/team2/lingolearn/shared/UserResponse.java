@@ -12,10 +12,15 @@ import java.util.List;
  */
 public class UserResponse {
 
-	private String 	respId;			// Unique response Id
+	private String 	sessionId,		// Session id
+					gplusId,		// The user's google ID	
+					cardId,			// Id of the card, shown to the user
+					confuserType;	// The type of confuser that was used
+	private int     sessionCardNo,	// The nth time the user has seen that card during the session
+					responseNo;		// The nth time the user has guessed during that card viewing
 	private boolean isCorrect,		// Holds status if the user's provided answer was correct
 					isDropped,		// Holds status if the user dropped this card
 					isChanged;		// Holds status if the user was not sure and changed answer one or more times 
 	private float	timeToAnswer; 	// Time, user spent answering this question
-	private String  cardShown;		// Id of the card, shown to the user
+
 }

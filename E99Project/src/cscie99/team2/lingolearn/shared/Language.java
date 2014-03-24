@@ -13,7 +13,23 @@ import java.io.Serializable;
  */
 public class Language implements Serializable {
 	
-	String langId,		// unique ISO 639 letter code
-	       langName;	// language name in English
+	private String langId;	// language name in English
+	private String langName;
+
+	public String getLangId() {
+		return langId;
+	}
+
+	public void setLangId(String langId) {
+		this.langId = langId;
+	}
+
+	public String getLangName() {
+		return langName;
+	}
+
+	public void setLangName(String langName) {
+		this.langName = langName;
+	}
 
 }

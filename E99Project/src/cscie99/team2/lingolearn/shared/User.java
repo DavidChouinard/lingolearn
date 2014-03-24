@@ -1,8 +1,10 @@
 package cscie99.team2.lingolearn.shared;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 
 
 
@@ -23,9 +25,14 @@ public class User implements Serializable {
 	Gender gender;
 	Language nativeLanguage;
 	Set<Language> languages;
+	Set<Textbook> textbooks;
+	Set<OutsideCourse> outsideCourses;
+	Date userRegistrationTime;
 	
 	public User(){
 		this.languages = new HashSet<Language>();
+		this.textbooks = new HashSet<Textbook>();
+		this.outsideCourses = new HashSet<OutsideCourse>();
 	}
 	
 	public User( String gplusId, String gmail, String fname,
@@ -37,12 +44,23 @@ public class User implements Serializable {
 		this.gender = gender;
 		this.nativeLanguage = nativ;
 		this.languages = new HashSet<Language>();
+		this.textbooks = new HashSet<Textbook>();
+		this.outsideCourses = new HashSet<OutsideCourse>();
+		this.userRegistrationTime = new Date();
 		
 		addLanguage(nativ);
 	}
 	
 	public boolean addLanguage( Language lang ){
 		return languages.add(lang);
+	}
+	
+	public boolean addTextbook (Textbook textbook) {
+		return textbooks.add(textbook);
+	}
+	
+	public boolean addOutsideCourse (OutsideCourse outsideCourse) {
+		return outsideCourses.add(outsideCourse);
 	}
 
 	public String getGplusId() {
@@ -99,6 +117,22 @@ public class User implements Serializable {
 
 	public void setLanguages(Set<Language> languages) {
 		this.languages = languages;
+	}
+	
+	public Set<Textbook> getTextbooks() {
+		return textbooks;
+	}
+	
+	public void setTextbooks(Set<Textbook> textbooks) {
+		this.textbooks = textbooks;
+	}
+	
+	public Set<OutsideCourse> getOutsideCourses() {
+		return outsideCourses;
+	}
+	
+	public void setOutsideCourses (Set<OutsideCourse> outsideCourses) {
+		this.outsideCourses = outsideCourses;
 	}
 	
 	
