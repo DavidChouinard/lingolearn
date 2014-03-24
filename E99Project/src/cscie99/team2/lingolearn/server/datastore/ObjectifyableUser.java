@@ -1,108 +1,74 @@
 package cscie99.team2.lingolearn.server.datastore;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
-import javax.jdo.annotations.Index;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-import com.google.gwt.dev.util.collect.HashSet;
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.Serialize;
 
 import cscie99.team2.lingolearn.shared.Gender;
 import cscie99.team2.lingolearn.shared.Language;
+import cscie99.team2.lingolearn.shared.OutsideCourse;
+import cscie99.team2.lingolearn.shared.Textbook;
+import cscie99.team2.lingolearn.shared.User;
 
 
 
-@Entity
+@Entity(name="ObjectifyableUser")
 public class ObjectifyableUser implements Serializable {
 
 	private static final long serialVersionUID = 4690764038062275542L;
 
-	@Id
-	String gplusId;					// id from google +
-			
-	@Index
-	String gmail;
-	String firstName;
-	String lastName;
+	@Id String gplusId;					// id from google +		
+	@Index String gmail;
+	@Index String firstName;
+	@Index String lastName;
 	Gender gender;
-	Language nativeLanguage;
-	Set<Language> languages;
+	@Serialize Language nativeLanguage;
+	@Serialize Set<Language> languages;
+	@Serialize Set<Textbook> textbooks;
+	@Serialize Set<OutsideCourse> outsideCourses;
+	Date userRegistrationTime;
 	
 	public ObjectifyableUser(){}
 	
-	public ObjectifyableUser( String gplusId, String gmail, String fname,
-							String lname, Gender gender, Language nativ ){
-		this.gplusId = gplusId;
-		this.gmail = gmail;
-		this.firstName = fname;
-		this.lastName = lname;
-		this.gender = gender;
-		this.nativeLanguage = nativ;
-		this.languages = new HashSet<Language>();
-		
-		addLanguage(nativ);
-	}
-	
-	public boolean addLanguage( Language lang ){
-		return languages.add(lang);
-	}
-
-	public String getGplusId() {
-		return gplusId;
+	/**
+	 * This method creates Objectifyable Proxy from real object
+	 * @param user		User object
+	 */
+	public ObjectifyableUser( User user ){
+		this.gplusId = user.getGplusId();
+		this.gmail = user.getGmail();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.gender = user.getGender();
+		this.nativeLanguage = user.getNativeLanguage();
+		this.languages = user.getLanguages();
+		this.textbooks = user.getTextbooks();
+		this.outsideCourses = user.getOutsideCourses();
+		this.userRegistrationTime = user.getUserRegistrationTime();
 	}
 
-	public void setGplusId(String gplusId) {
-		this.gplusId = gplusId;
-	}
-
-	public String getGmail() {
-		return gmail;
-	}
-
-	public void setGmail(String gmail) {
-		this.gmail = gmail;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public Gender getGender() {
-		return gender;
-	}
-
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
-
-	public Language getNativeLanguage() {
-		return nativeLanguage;
-	}
-
-	public void setNativeLanguage(Language nativeLanguage) {
-		this.nativeLanguage = nativeLanguage;
-	}
-
-	public Set<Language> getLanguages() {
-		return languages;
-	}
-
-	public void setLanguages(Set<Language> languages) {
-		this.languages = languages;
+	/**
+	 * This method reconstructs real object from Objectifyable Proxy
+	 * @return Card object
+	 */
+	public User getUser() {
+		User u = new User ();
+		u.setGplusId(this.gplusId);
+		u.setGmail(this.gmail);
+		u.setFirstName(this.firstName);
+		u.setLastName(this.lastName);
+		u.setGender(this.gender);
+		u.setNativeLanguage(this.nativeLanguage);
+		u.setLanguages(this.languages);
+		u.setTextbooks(this.textbooks);
+		u.setOutsideCourses(this.outsideCourses);
+		u.setUserRegistrationTime(this.userRegistrationTime);
+		return u;
 	}
 	
 	

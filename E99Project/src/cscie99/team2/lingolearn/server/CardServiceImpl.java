@@ -4,14 +4,21 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import cscie99.team2.lingolearn.client.CardService;
 import cscie99.team2.lingolearn.server.datastore.CardDAO;
+import cscie99.team2.lingolearn.server.datastore.UserDAO;
 import cscie99.team2.lingolearn.shared.Card;
+import cscie99.team2.lingolearn.shared.Gender;
 import cscie99.team2.lingolearn.shared.Image;
+import cscie99.team2.lingolearn.shared.Language;
+import cscie99.team2.lingolearn.shared.OutsideCourse;
 import cscie99.team2.lingolearn.shared.Sound;
+import cscie99.team2.lingolearn.shared.Textbook;
+import cscie99.team2.lingolearn.shared.User;
 import cscie99.team2.lingolearn.shared.error.CardNotFoundException;
 
 @SuppressWarnings("serial")
 public class CardServiceImpl extends RemoteServiceServlet implements CardService {
 	
+	private static final boolean Retrivining = false;
 	CardDAO cardAccessor = CardDAO.getInstance();
 	
 	public Card getCardById(String cardId) {
@@ -49,6 +56,23 @@ public class CardServiceImpl extends RemoteServiceServlet implements CardService
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		/// Temp. test for userDAO
+		/// Prepopulate
+		Language l = new Language();
+		l.setLangId("1");
+		l.setLangName("en-us");
+		User u = new User("googleID", "test@gmail.com", "John",
+							"Smith", Gender.MALE, l);
+		u.addOutsideCourse(new OutsideCourse("123", "Fun Course", "Fun School"));
+		u.addTextbook(new Textbook("ABC", "Sweet Book", 2005));
+		
+		UserDAO userAccessor = UserDAO.getInstance();		
+		userAccessor.storeUser(u);
+				
+		User ru = new User(); 
+		ru = userAccessor.getUserByGmail("test@gmail.com");
+		
 		return c;
 	}
 

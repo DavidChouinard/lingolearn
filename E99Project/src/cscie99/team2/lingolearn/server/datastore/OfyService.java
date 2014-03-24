@@ -20,6 +20,7 @@ public class OfyService {
 		factory().register(ObjectifyableCard.class);
 		factory().register(ObjectifyableImage.class);
 		factory().register(ObjectifyableSound.class);
+		factory().register(ObjectifyableUser.class);
 		// factory().register(OtherClass.class);
 	}
 

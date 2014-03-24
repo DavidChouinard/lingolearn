@@ -9,7 +9,9 @@ import java.io.Serializable;
  *This class represents a textbook a user has read.
  */
 public class Textbook implements Serializable{
-	
+
+	private static final long serialVersionUID = 4537611207426774788L;
+
 	private String textbookID;
 	private String name;
 	private int year;

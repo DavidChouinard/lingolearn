@@ -134,6 +134,14 @@ public class User implements Serializable {
 	public void setOutsideCourses (Set<OutsideCourse> outsideCourses) {
 		this.outsideCourses = outsideCourses;
 	}
+
+	public Date getUserRegistrationTime() {
+		return userRegistrationTime;
+	}
+
+	public void setUserRegistrationTime(Date userRegistrationTime) {
+		this.userRegistrationTime = userRegistrationTime;
+	}
 	
 	
 }
