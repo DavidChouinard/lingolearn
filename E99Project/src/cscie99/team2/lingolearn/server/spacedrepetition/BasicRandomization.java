@@ -25,6 +25,7 @@ public class BasicRandomization extends SpacedRepetition {
 		if (shuffledDeck.size() == 0) {
 			throw new SpacedRepetitionException("The deck needs to be reshuffled.");
 		}
+		// Remove and return the first card in the draw deck
 		return shuffledDeck.remove(0);
 	}
 	
