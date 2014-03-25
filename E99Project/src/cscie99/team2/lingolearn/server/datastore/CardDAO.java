@@ -38,7 +38,7 @@ public class CardDAO {
 	public Card getCardByKanji(String kanji) throws CardNotFoundException {
 		ObjectifyableCard oCard = ofy().load().type(ObjectifyableCard.class).filter("kanji", kanji).first().now();
 		if (oCard==null)
-			throw new CardNotFoundException("Card was not found in the datastore.");
+			throw new CardNotFoundException("Card was not found in the datastore", "kanji", kanji);
 		else {
 			Card card = oCard.getCard();
 			return card;
@@ -54,7 +54,7 @@ public class CardDAO {
 	public Card getCardByHiragana(String hiragana) throws CardNotFoundException {
 		ObjectifyableCard oCard = ofy().load().type(ObjectifyableCard.class).filter("hiragana", hiragana).first().now();
 		if (oCard==null)
-			throw new CardNotFoundException("Card was not found in the datastore.");
+			throw new CardNotFoundException("Card was not found in the datastore", "hiragana", hiragana);
 		else {
 			Card card = oCard.getCard();
 			return card;
@@ -70,7 +70,7 @@ public class CardDAO {
 	public Card getCardByKatakana(String katakana) throws CardNotFoundException {
 		ObjectifyableCard oCard = ofy().load().type(ObjectifyableCard.class).filter("katakana", katakana).first().now();
 		if (oCard==null)
-			throw new CardNotFoundException("Card was not found in the datastore.");
+			throw new CardNotFoundException("Card was not found in the datastore", "katakana", katakana);
 		else {
 			Card card = oCard.getCard();
 			return card;
@@ -86,7 +86,7 @@ public class CardDAO {
 	public Card getCardByTranslation(String translation) throws CardNotFoundException {
 		ObjectifyableCard oCard = ofy().load().type(ObjectifyableCard.class).filter("transation", translation).first().now();
 		if (oCard==null)
-			throw new CardNotFoundException("Card was not found in the datastore.");
+			throw new CardNotFoundException("Card was not found in the datastore", "transation", translation);
 		else {
 			Card card = oCard.getCard();
 			return card;
@@ -103,7 +103,7 @@ public class CardDAO {
 	public Card getCardByEnTranslation(String eng) throws CardNotFoundException {
 		ObjectifyableCard oCard = ofy().load().type(ObjectifyableCard.class).filter("enTransation", eng).first().now();
 		if (oCard==null)
-			throw new CardNotFoundException("Card was not found in the datastore.");
+			throw new CardNotFoundException("Card was not found in the datastore", "enTransation", eng);
 		else {
 			Card card = oCard.getCard();
 			return card;
@@ -119,7 +119,7 @@ public class CardDAO {
 	public Card getCardByDescription(String desc) throws CardNotFoundException {
 		ObjectifyableCard oCard = ofy().load().type(ObjectifyableCard.class).filter("description", desc).first().now();
 		if (oCard==null)
-			throw new CardNotFoundException("Card was not found in the datastore.");
+			throw new CardNotFoundException("Card was not found in the datastore", "description", desc);
 		else {
 			Card card = oCard.getCard();
 			return card;}
@@ -140,7 +140,7 @@ public class CardDAO {
 			cards.add(it.next().getCard());
 		}
 		if (cards.size() == 0) {
-			throw new CardNotFoundException("Cards were not found in the datastore.");
+			throw new CardNotFoundException("Cards were not found in the datastore", "kanji", kanji);
 		} else {
 			return cards;
 		}
