@@ -1,33 +1,46 @@
 package cscie99.team2.lingolearn.server.spacedrepetition;
 
-import cscie99.team2.lingolearn.shared.Deck;
+import java.util.Collections;
+import java.util.List;
+
+import cscie99.team2.lingolearn.shared.error.SpacedRepetitionException;
 
 /**
  * This class implements a basic randomization method, that isn't spaced
  * repetition per se.
  */
-public class BasicRandomization implements SpacedRepetition {
-
+public class BasicRandomization extends SpacedRepetition {
+	// The shuffled deck of cards that is drawn off of 
+	private List<Long> shuffledDeck = null;
+	
 	@Override
-	public int DrawCard() {
-		// TODO Auto-generated method stub
-		return 0;
+	public Long DrawCard() throws SpacedRepetitionException {
+		// Check for issues with the deck
+		if (deck == null) {
+			throw new SpacedRepetitionException("The deck has not been provided yet.");
+		}
+		if (shuffledDeck == null) {
+			throw new SpacedRepetitionException("The deck has not been shuffled yet.");
+		}
+		if (shuffledDeck.size() == 0) {
+			throw new SpacedRepetitionException("The deck needs to be reshuffled.");
+		}
+		return shuffledDeck.remove(0);
 	}
-
+	
 	@Override
 	public boolean CardsRemaining() {
-		// TODO Auto-generated method stub
-		return false;
+		return (shuffledDeck.size() > 0);
 	}
-
-	public void ShuffleDeck() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
-	public void SetDeck(Deck deck) {
-		// TODO Auto-generated method stub
-		
+	public void ShuffleDeck() throws SpacedRepetitionException {
+		// Make sure we have a deck to work with
+		if (deck == null) {
+			throw new SpacedRepetitionException("The deck has not been provided yet.");
+		}
+		// Copy the card ids over and shuffle the deck
+		shuffledDeck = deck.getCardIds();
+		Collections.shuffle(shuffledDeck);
 	}
 }

@@ -15,4 +15,13 @@ public class SpacedRepetitionException extends Exception {
 	public SpacedRepetitionException(String message, Throwable cause) {
 		super(message, cause);
 	}
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param message The error message to associate with the error.
+	 */
+	public SpacedRepetitionException(String message) {
+		super(message);
+	}
 }

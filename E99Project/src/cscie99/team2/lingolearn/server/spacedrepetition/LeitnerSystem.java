@@ -1,32 +1,25 @@
 package cscie99.team2.lingolearn.server.spacedrepetition;
 
-import cscie99.team2.lingolearn.shared.Deck;
+import cscie99.team2.lingolearn.shared.error.SpacedRepetitionException;
 
 /**
  * This class implements the Leitner System of spaced-repetition.
  */
-public class LeitnerSystem implements SpacedRepetition {
-
-	@Override
-	public int DrawCard() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+public class LeitnerSystem extends SpacedRepetition {
 	@Override
 	public boolean CardsRemaining() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public void ShuffleDeck() {
+	@Override
+	public Long DrawCard() throws SpacedRepetitionException {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void SetDeck(Deck deck) {
-		// TODO Auto-generated method stub
-		
+	public void ShuffleDeck() throws SpacedRepetitionException {
+		// TODO Auto-generated method stub	
 	}
 }
