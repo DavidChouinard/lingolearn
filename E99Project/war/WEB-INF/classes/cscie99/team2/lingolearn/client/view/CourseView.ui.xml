@@ -17,6 +17,13 @@
         <div class='{style.courses}' ui:field='assignments'></div>
       </div>
     </div>
+    
+    <div class='panel panel-default'>
+      <div class='panel-heading'>Analytics</div>
+      <div class='panel-body'>
+        <g:VerticalPanel ui:field='analytics'></g:VerticalPanel>
+      </div>
+    </div>
 
   </g:HTMLPanel>
 

@@ -1,6 +1,8 @@
 package cscie99.team2.lingolearn.client.presenter;
 
 
+import cscie99.team2.lingolearn.client.AnalyticsService;
+import cscie99.team2.lingolearn.client.AnalyticsServiceAsync;
 import cscie99.team2.lingolearn.client.CourseServiceAsync;
 import cscie99.team2.lingolearn.client.event.ViewCardEvent;
 import cscie99.team2.lingolearn.client.view.CourseView;
@@ -19,7 +21,10 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class CoursePresenter implements Presenter {  
 
@@ -27,16 +32,23 @@ public class CoursePresenter implements Presenter {
   private final CourseView display;
   private final CourseServiceAsync courseService;
   private final Course course;
+  private final AnalyticsServiceAsync analyticsService;
   
-  public CoursePresenter(CourseServiceAsync courseService, HandlerManager eventBus, CourseView display) {
+  public CoursePresenter(CourseServiceAsync courseService, 
+		  AnalyticsServiceAsync analyticsService, HandlerManager eventBus, 
+		  CourseView display) {
       this.courseService = courseService;
+      this.analyticsService = analyticsService;
 	  this.eventBus = eventBus;
       this.display = display;
       this.course = null;
   }
   
-  public CoursePresenter(CourseServiceAsync courseService, HandlerManager eventBus, CourseView display, Course course) {
+  public CoursePresenter(CourseServiceAsync courseService, 
+		  AnalyticsServiceAsync analyticsService, HandlerManager eventBus, 
+		  CourseView display, Course course) {
       this.courseService = courseService;
+      this.analyticsService = analyticsService;
 	  this.eventBus = eventBus;
       this.display = display;
       this.course = course;
@@ -59,9 +71,30 @@ public class CoursePresenter implements Presenter {
 	  display.setCourseData(this.course);
 	  
 	  
-	  courseService.getSessionsForCourse(this.course.getCourseId(), new AsyncCallback<ArrayList<Session>>() {
+	  courseService.getSessionsForCourse(this.course.getCourseId(), 
+			  new AsyncCallback<ArrayList<Session>>() {
 		  public void onSuccess(ArrayList<Session> sessions) {
 	          display.setAssignmentList(sessions);
+	      }
+	      
+	      public void onFailure(Throwable caught) {
+	        Window.alert("Error fetching course assignments");
+	      }
+	  });
+	  
+	  analyticsService.getCourseMetricsData(this.course.getCourseId(), 
+			  new AsyncCallback<Map<String, Map<String, Float>>>() {
+		  public void onSuccess(Map<String, Map<String, Float>> data) {
+			  for (Entry<String, Map<String, Float>> entry : data.entrySet()) {
+				    String studentName = entry.getKey();
+				    Map<String, Float> studentData = entry.getValue();
+				    Map<String, Float> conglomerateData = new HashMap<String, Float>();
+				    for (Entry<String, Float> statEntry : studentData.entrySet()) {
+				    	String statName = statEntry.getKey();
+				    	Float statValue = statEntry.getValue();
+				    	display.addStatisticToDisplay(statName, statValue.toString());
+				    }
+			  }
 	      }
 	      
 	      public void onFailure(Throwable caught) {

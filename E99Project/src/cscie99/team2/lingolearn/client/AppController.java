@@ -24,14 +24,17 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
   private final UserServiceAsync userService;
   private final CardServiceAsync cardService; 
   private final CourseServiceAsync courseService;
+  private final AnalyticsServiceAsync analyticsService;
   private HasWidgets container;
   
   public AppController(UserServiceAsync userService, CourseServiceAsync courseService,
-		  CardServiceAsync cardService, HandlerManager eventBus) {
+		  CardServiceAsync cardService, AnalyticsServiceAsync analyticsService, 
+		  HandlerManager eventBus) {
     this.eventBus = eventBus;
     this.userService = userService;
     this.cardService = cardService;
     this.courseService = courseService;
+    this.analyticsService = analyticsService;
     bind();
   }
   
@@ -61,7 +64,8 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
   private void doViewCourse(Course course) {
     History.newItem("viewCourse", false);
     System.out.println(course.getName());
-    Presenter presenter = new CoursePresenter(courseService, eventBus, new CourseView(), course);
+    Presenter presenter = new CoursePresenter(courseService, analyticsService, 
+    		eventBus, new CourseView(), course);
     presenter.go(container);
   }
   
@@ -88,10 +92,12 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     	  presenter = new CardPresenter(cardService, eventBus, new CardView());
     	  break;
       case "home":
-    	  presenter = new HomePresenter(userService, courseService, eventBus, new HomeView());
+    	  presenter = new HomePresenter(userService, courseService, 
+    			  eventBus, new HomeView());
     	  break;
       case "viewCourse":
-    	  presenter = new CoursePresenter(courseService, eventBus, new CourseView());
+    	  presenter = new CoursePresenter(courseService, analyticsService, 
+    			  eventBus, new CourseView());
     	  break;
       }
       

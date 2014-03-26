@@ -36,6 +36,16 @@
     <url-pattern>/lingolearn/userService</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>analyticsServlet</servlet-name>
+    <servlet-class>cscie99.team2.lingolearn.server.AnalyticsServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>analyticsServlet</servlet-name>
+    <url-pattern>/lingolearn/analyticsService</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>app.html</welcome-file>
