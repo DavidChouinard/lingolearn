@@ -12,6 +12,8 @@ public interface UserServiceAsync {
 	
 	public void logoutUser( User user, AsyncCallback<Boolean> callback );
 	
+	public void registerUser( User user, AsyncCallback<User> callback );
+	
 	/* Get the user who is currently logged into this session */
 	public void getCurrentUser( AsyncCallback<User> callback );
 	

@@ -15,6 +15,8 @@ public interface UserService extends RemoteService {
 	
 	public Boolean logoutUser( User user );
 	
+	public User registerUser( User u );
+	
 	/* Get the user who is currently logged into this session */
 	public User getCurrentUser();
 	
