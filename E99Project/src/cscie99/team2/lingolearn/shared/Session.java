@@ -29,7 +29,11 @@ public abstract class Session implements Serializable {
 	 * @return	Deck of the cards for this session
 	 */
 	public Deck getDeck() {
-		
-		return null;
+		return deck;
 	}
+	
+	public void setDeck(Deck deck) {
+		this.deck = deck;
+	}
+	
 }

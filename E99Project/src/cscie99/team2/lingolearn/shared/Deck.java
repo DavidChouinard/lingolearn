@@ -1,5 +1,6 @@
 package cscie99.team2.lingolearn.shared;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,9 +9,15 @@ import cscie99.team2.lingolearn.shared.error.CardNotFoundException;
 /**
  * This class represents a deck of the flashcards.
  */
-public class Deck {
+public class Deck implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	// The unique id of the deck
-	private int id;
+	private Long id;
 	
 	// The map of cards that are part of this deck
 	private HashMap<Long, Card> cards;
@@ -27,7 +34,7 @@ public class Deck {
 	/**
 	 * Constructor.
 	 */
-	public Deck(int id, List<Card> cards, String language, String nativeLanguage) {
+	public Deck(Long id, List<Card> cards, String language, String nativeLanguage) {
 		this.id = id;
 		this.language = language;
 		this.nativeLangauge = nativeLanguage;
@@ -36,6 +43,8 @@ public class Deck {
 			this.cards.put(card.getId(), card);
 		}
 	}
+	
+	public Deck() {}
 	
 	/**
 	 * Add the card indicated to the deck. If it already exists then this 
@@ -77,7 +86,7 @@ public class Deck {
 	/**
 	 * Get the id of this deck.
 	 */
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	

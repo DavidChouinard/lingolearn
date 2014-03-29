@@ -17,6 +17,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.InlineHTML;
 
 import cscie99.team2.lingolearn.shared.Course;
+import cscie99.team2.lingolearn.shared.Deck;
 import cscie99.team2.lingolearn.shared.Session;
 
 public class CourseView extends Composite {
@@ -25,7 +26,7 @@ public class CourseView extends Composite {
   private static final Binder binder = GWT.create(Binder.class);
 
   @UiField Element courseTitle;
-  @UiField Element assignments;
+  @UiField VerticalPanel assignments;
   @UiField VerticalPanel analytics;
   
   public CourseView() {
@@ -38,7 +39,14 @@ public class CourseView extends Composite {
   }
   
   public void setAssignmentList(ArrayList<Session> sessions) {
-	  this.assignments.setInnerHTML("hey");
+	  for (int i=0;i<sessions.size();i++) {
+		  InlineHTML text = new InlineHTML();
+		  Deck d = sessions.get(i).getDeck();
+		  System.out.println(d);
+		  System.out.println(sessions.get(i));
+		  text.setHTML("Deck #" + sessions.get(i).getDeck().getId());
+		  assignments.add(text);
+	  }	  
   }
   
   public void addStatisticToDisplay(String name, String value) {

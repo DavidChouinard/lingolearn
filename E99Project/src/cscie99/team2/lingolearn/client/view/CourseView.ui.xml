@@ -14,7 +14,7 @@
     <div class='panel panel-default'>
       <div class='panel-heading'>Assignments</div>
       <div class='panel-body'>
-        <div class='{style.courses}' ui:field='assignments'></div>
+          <g:VerticalPanel ui:field='assignments'></g:VerticalPanel>
       </div>
     </div>
     
