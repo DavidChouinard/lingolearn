@@ -8,7 +8,9 @@ import cscie99.team2.lingolearn.client.presenter.CardPresenter;
 import cscie99.team2.lingolearn.client.presenter.CoursePresenter;
 import cscie99.team2.lingolearn.client.presenter.HomePresenter;
 import cscie99.team2.lingolearn.client.presenter.Presenter;
+import cscie99.team2.lingolearn.client.presenter.RegistrationPresenter;
 import cscie99.team2.lingolearn.client.presenter.SessionPresenter;
+import cscie99.team2.lingolearn.client.view.AppRegisterView;
 import cscie99.team2.lingolearn.client.view.CardView;
 import cscie99.team2.lingolearn.client.view.CourseView;
 import cscie99.team2.lingolearn.client.view.HomeView;
@@ -104,6 +106,10 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
       case "session":
     	  presenter = new SessionPresenter(courseService, cardService, 
     			  eventBus, new SessionView());
+    	  break;
+      case "register":
+    	  presenter = new RegistrationPresenter(userService, eventBus, new AppRegisterView());
+    	  break;
       }
       
       if (presenter != null) {
