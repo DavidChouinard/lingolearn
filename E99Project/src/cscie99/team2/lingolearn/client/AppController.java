@@ -8,9 +8,11 @@ import cscie99.team2.lingolearn.client.presenter.CardPresenter;
 import cscie99.team2.lingolearn.client.presenter.CoursePresenter;
 import cscie99.team2.lingolearn.client.presenter.HomePresenter;
 import cscie99.team2.lingolearn.client.presenter.Presenter;
+import cscie99.team2.lingolearn.client.presenter.SessionPresenter;
 import cscie99.team2.lingolearn.client.view.CardView;
 import cscie99.team2.lingolearn.client.view.CourseView;
 import cscie99.team2.lingolearn.client.view.HomeView;
+import cscie99.team2.lingolearn.client.view.SessionView;
 import cscie99.team2.lingolearn.shared.Course;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -63,7 +65,6 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
   
   private void doViewCourse(Course course) {
     History.newItem("viewCourse", false);
-    System.out.println(course.getName());
     Presenter presenter = new CoursePresenter(courseService, analyticsService, 
     		eventBus, new CourseView(), course);
     presenter.go(container);
@@ -89,7 +90,8 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
       switch (token) {
       
       case "viewCard": 
-    	  presenter = new CardPresenter(cardService, eventBus, new CardView());
+    	  presenter = new CardPresenter(cardService, 
+    			  eventBus, new CardView());
     	  break;
       case "home":
     	  presenter = new HomePresenter(userService, courseService, 
@@ -99,6 +101,9 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     	  presenter = new CoursePresenter(courseService, analyticsService, 
     			  eventBus, new CourseView());
     	  break;
+      case "session":
+    	  presenter = new SessionPresenter(courseService, cardService, 
+    			  eventBus, new SessionView());
       }
       
       if (presenter != null) {

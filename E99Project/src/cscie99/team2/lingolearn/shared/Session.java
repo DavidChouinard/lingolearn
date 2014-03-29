@@ -36,4 +36,8 @@ public abstract class Session implements Serializable {
 		this.deck = deck;
 	}
 	
+	public String getSessionId() {
+		return sessId;
+	}
+	
 }

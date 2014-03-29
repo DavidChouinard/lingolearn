@@ -10,7 +10,10 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.dom.client.Element;
@@ -20,40 +23,27 @@ import cscie99.team2.lingolearn.shared.Course;
 import cscie99.team2.lingolearn.shared.Deck;
 import cscie99.team2.lingolearn.shared.Session;
 
-public class CourseView extends Composite {
+public class SessionView extends Composite {
   
-  interface Binder extends UiBinder<Widget, CourseView> { }
+  interface Binder extends UiBinder<Widget, SessionView> { }
   private static final Binder binder = GWT.create(Binder.class);
 
-  @UiField Element courseTitle;
-  @UiField VerticalPanel assignments;
-  @UiField VerticalPanel analytics;
+  @UiField FlowPanel sessionHeader;
+  @UiField FlowPanel cardArea;
   
-  public CourseView() {
+  public SessionView() {
 	  initWidget(binder.createAndBindUi(this));
   }
   
 
-  public void setCourseData(Course course) {
-	  this.courseTitle.setInnerHTML(course.getName());
+  public void setSessionName(String name) {
+	  InlineHTML title = new InlineHTML();
+	  title.setText(name);
+	  this.sessionHeader.add(title);
   }
   
-  public void setAssignmentList(ArrayList<Session> sessions) {
-	  for (int i=0;i<sessions.size();i++) {
-		  InlineHTML text = new InlineHTML();
-		  Deck d = sessions.get(i).getDeck();
-		  System.out.println(d);
-		  System.out.println(sessions.get(i));
-		  text.setHTML("<a href='app.html?sessionId=" + sessions.get(i).getSessionId() + 
-				  "#session'>Deck #" + sessions.get(i).getDeck().getId() + "</a>");
-		  assignments.add(text);
-	  }	  
-  }
-  
-  public void addStatisticToDisplay(String name, String value) {
-	  InlineHTML text = new InlineHTML();
-	  text.setHTML(name + ":  " + value);
-	  analytics.add(text);
+  public HasWidgets getCardContainer() {
+	  return this.cardArea;
   }
   
   public Widget asWidget() {
