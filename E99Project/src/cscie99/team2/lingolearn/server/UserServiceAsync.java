@@ -1,4 +1,4 @@
-package cscie99.team2.lingolearn.client;
+package cscie99.team2.lingolearn.server;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
