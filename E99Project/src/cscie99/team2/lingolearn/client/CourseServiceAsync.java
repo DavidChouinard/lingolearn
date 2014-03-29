@@ -13,5 +13,6 @@ public interface CourseServiceAsync {
   public void getCoursesUserIsEnrolledIn(User user, AsyncCallback<ArrayList<Course>> callback);
   public void getCourseById(String id, AsyncCallback<Course> callback);
   public void getSessionsForCourse(String courseId, AsyncCallback<ArrayList<Session>> callback);
+  public void getSessionById(String sessionId, AsyncCallback<Session> callback);
 }
 

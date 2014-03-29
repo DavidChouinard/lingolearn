@@ -40,4 +40,8 @@ public abstract class Session implements Serializable {
 		return sessId;
 	}
 	
+	public void setSessionId(String sessionId) {
+		this.sessId = sessionId;
+	}
+	
 }

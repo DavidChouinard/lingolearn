@@ -83,7 +83,29 @@ public class CourseServiceImpl extends RemoteServiceServlet implements CourseSer
 		l.setDeck(d);
 		ArrayList<Session> s = new ArrayList<Session>();
 		s.add(l);
+		l.setSessionId("session84");
 		return s;
+	}
+
+
+	@Override
+	public Session getSessionById(String sessionId) {
+		Card c1 = new Card();
+		c1.setKanji("岡");
+		c1.setId((long)1);
+		c1.setEnTranslation("card 1 translation");
+		Card c2 = new Card();
+		c2.setKanji("字");
+		c2.setId((long)2);
+		c2.setEnTranslation("card 2 translation");
+		ArrayList<Card> cards = new ArrayList<Card>();
+		cards.add(c1);
+		cards.add(c2);
+		Deck d = new Deck((long) 7, cards, "japanese", "english");
+		Lesson l = new Lesson();
+		l.setDeck(d);
+		l.setSessionId("session84");
+		return l;
 	}
 
 }

@@ -15,4 +15,5 @@ public interface CourseService extends RemoteService {
 	public ArrayList<Course> getCoursesUserIsEnrolledIn(User user);
 	public Course getCourseById(String courseId);
 	public ArrayList<Session> getSessionsForCourse(String courseId);
+	public Session getSessionById(String sessionId);
 }

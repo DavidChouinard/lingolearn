@@ -45,11 +45,11 @@ public class CardPresenter implements Presenter {
     bind();
     container.clear();
     container.add(display.asWidget());
-    setCardData();
+    setCardData((long)1);
   }
   
-  private void setCardData() {
-	  cardService.getCardById("1", new AsyncCallback<Card>() {
+  public void setCardData(Long cardId) {
+	  cardService.getCardById(cardId, new AsyncCallback<Card>() {
 	      public void onSuccess(Card card) {
 	          display.setData(card);
 	      }

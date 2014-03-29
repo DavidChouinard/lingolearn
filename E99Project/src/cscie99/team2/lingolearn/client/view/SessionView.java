@@ -30,9 +30,12 @@ public class SessionView extends Composite {
 
   @UiField FlowPanel sessionHeader;
   @UiField FlowPanel cardArea;
+  @UiField FlowPanel controlsArea;
+  @UiField Button nextButton;
   
   public SessionView() {
 	  initWidget(binder.createAndBindUi(this));
+	  this.showControls();
   }
   
 
@@ -46,7 +49,19 @@ public class SessionView extends Composite {
 	  return this.cardArea;
   }
   
+  public void hideControls() {
+	  this.controlsArea.setVisible(false);
+  }
+  
+  public void showControls() {
+	  this.controlsArea.setVisible(true);
+  }
+  
+  public HasClickHandlers getNextButton() {
+	  return nextButton;
+  }
+  
   public Widget asWidget() {
-    return this;
+      return this;
   }
 }

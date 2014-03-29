@@ -48,7 +48,6 @@ public class CardView extends Composite {
 	  
 	  this.back = new FlowPanel();
 	  this.back.setStyleName("card-back");
-	 // this.back.setVisible(false);
 	  this.card.add(this.back);
 	  
 	  this.kanji = new FlowPanel();
@@ -74,9 +73,14 @@ public class CardView extends Composite {
   }
 
   public void setData(Card card) {
+	  //"unflip" the card if it is flipped
+	  this.card_container.removeStyleName("card-flipped");
+	  
+	  //clear DOM nodes
 	  this.kanji.clear();
 	  this.englishTranslation.clear();
 	  
+	  //add card data to DOM nodes
 	  HTML tb1 = new HTML();
 	  tb1.setText(card.getKanji());
 	  this.kanji.add(tb1);

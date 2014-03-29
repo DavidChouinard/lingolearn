@@ -9,7 +9,7 @@ import java.util.List;
 
 @RemoteServiceRelativePath("cardService")
 public interface CardService extends RemoteService {
-	public Card getCardById(String cardId);
+	public Card getCardById(Long cardId);
 	public Card getCardByKanji(String kanji);
 	public Card getCardByHiragana(String hiragana);
 	public Card getCardByKatakana(String katakana);

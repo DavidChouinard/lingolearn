@@ -13,6 +13,10 @@
 	<g:FlowPanel ui:field='sessionHeader'></g:FlowPanel>
     
     <g:FlowPanel ui:field='cardArea'></g:FlowPanel>
+    
+    <g:FlowPanel ui:field='controlsArea'>
+        <g:Button ui:field='nextButton'>Next</g:Button>
+    </g:FlowPanel>
 
   </g:HTMLPanel>
 

@@ -24,7 +24,7 @@ public class CardServiceImpl extends RemoteServiceServlet implements CardService
 	private static final boolean Retrivining = false;
 	CardDAO cardAccessor = CardDAO.getInstance();
 	
-	public Card getCardById(String cardId) {
+	public Card getCardById(Long cardId) {
 		
 		Card c = null;
 			

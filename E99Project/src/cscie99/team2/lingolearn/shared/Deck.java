@@ -1,6 +1,7 @@
 package cscie99.team2.lingolearn.shared;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,8 +40,9 @@ public class Deck implements Serializable {
 		this.language = language;
 		this.nativeLangauge = nativeLanguage;
 		this.cards = new HashMap<Long, Card>();
+		this.cardIds = new ArrayList<Long>();
 		for (Card card : cards) {
-			this.cards.put(card.getId(), card);
+			this.add(card);
 		}
 	}
 	

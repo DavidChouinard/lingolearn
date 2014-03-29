@@ -37,6 +37,8 @@ public class SessionPresenter implements Presenter {
   private final SessionView display;
   private final CourseServiceAsync courseService;
   private final CardPresenter cardPresenter;
+  private Session session;
+  private int currentCardNumber;
   
   public SessionPresenter(CourseServiceAsync courseService, 
 		  CardServiceAsync cardService, HandlerManager eventBus, 
@@ -52,6 +54,11 @@ public class SessionPresenter implements Presenter {
   
   public void bind() {
     
+	  display.getNextButton().addClickHandler(new ClickHandler() {   
+	      public void onClick(ClickEvent event) {
+	    	  gotoNextCard();
+	      }
+	    });
   }
   
   public void go(final HasWidgets container) {
@@ -60,15 +67,36 @@ public class SessionPresenter implements Presenter {
     container.add(display.asWidget());
     
     //Set session to dummy
-    this.setSession(new Lesson());
+    this.setSession("1");
   }
   
   /*
    * Sets and starts a session
    */
-  public void setSession(Session session) {
-	  this.display.setSessionName("Test session");
-	  //session.getDeck().getCardIds()
+  public void setSession(String sessionId) {
+	  
+	  courseService.getSessionById(sessionId, 
+			  new AsyncCallback<Session>() {
+		  public void onSuccess(Session returnedSession) {
+			  session = returnedSession;
+			  display.setSessionName("Session " + session.getSessionId());
+			  currentCardNumber = 0;
+			  gotoNextCard();
+	      }
+	      
+	      public void onFailure(Throwable caught) {
+	        Window.alert("Error fetching session");
+	      }
+	  });
+  }
+  
+  private void gotoNextCard() {
+	  cardPresenter.setCardData(session.getDeck().getCardIds().get(currentCardNumber));
+	  currentCardNumber++;
+	  if (currentCardNumber >= session.getDeck().getCardIds().size()) {
+		  currentCardNumber = 0;
+	  }
+	  display.showControls();
   }
   
 

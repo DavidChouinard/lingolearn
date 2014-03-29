@@ -41,9 +41,6 @@ public class CourseView extends Composite {
   public void setAssignmentList(ArrayList<Session> sessions) {
 	  for (int i=0;i<sessions.size();i++) {
 		  InlineHTML text = new InlineHTML();
-		  Deck d = sessions.get(i).getDeck();
-		  System.out.println(d);
-		  System.out.println(sessions.get(i));
 		  text.setHTML("<a href='app.html?sessionId=" + sessions.get(i).getSessionId() + 
 				  "#session'>Deck #" + sessions.get(i).getDeck().getId() + "</a>");
 		  assignments.add(text);
