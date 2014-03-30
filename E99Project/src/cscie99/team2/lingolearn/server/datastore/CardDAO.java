@@ -35,6 +35,7 @@ public class CardDAO {
 		if (isCardUnique(card)) {
 			ofy().save().entity(new ObjectifyableCard(card)).now();
 		} else {
+			// TODO This should really be named something else
 			throw new CardNotFoundException("Duplicate card. It is already in the datastore", "kanji", card.getKanji());
 		}
 		return card;
