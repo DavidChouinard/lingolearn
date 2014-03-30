@@ -31,7 +31,7 @@ public class CoursePresenter implements Presenter {
   private final HandlerManager eventBus;
   private final CourseView display;
   private final CourseServiceAsync courseService;
-  private final Course course;
+  private Course course;
   private final AnalyticsServiceAsync analyticsService;
   
   public CoursePresenter(CourseServiceAsync courseService, 
@@ -44,16 +44,6 @@ public class CoursePresenter implements Presenter {
       this.course = null;
   }
   
-  public CoursePresenter(CourseServiceAsync courseService, 
-		  AnalyticsServiceAsync analyticsService, HandlerManager eventBus, 
-		  CourseView display, Course course) {
-      this.courseService = courseService;
-      this.analyticsService = analyticsService;
-	  this.eventBus = eventBus;
-      this.display = display;
-      this.course = course;
-  }
-  
   public void bind() {
     
   }
@@ -62,7 +52,23 @@ public class CoursePresenter implements Presenter {
     bind();
     container.clear();
     container.add(display.asWidget());
-    populateUserCourseInfo();
+    
+    //Set course based on query parameter in URL
+    String courseId = "course1";
+    courseId = Window.Location.getParameter("courseId");
+    this.getCourseInfo(courseId);
+  }
+  
+  private void getCourseInfo(String courseId) {
+	  courseService.getCourseById(courseId, new AsyncCallback<Course>() {
+		  public void onSuccess(Course returnedCourse) {
+			  course = returnedCourse;
+			  populateUserCourseInfo();
+		  }
+		  public void onFailure(Throwable caught) {
+			  Window.alert("Error fetching course from id");
+		  }
+	  });
   }
   
   private void populateUserCourseInfo() {

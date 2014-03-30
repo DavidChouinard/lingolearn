@@ -45,6 +45,7 @@ public class HomeView extends Composite {
   
   private HasClickHandlers addCourseLink(VerticalPanel panel, Course course) {
 	  Anchor a = new Anchor();
+	  a.setHref("app.html?courseId=" + course.getCourseId() + "#course");
 	  a.setText(course.getName());
 	  panel.add(a);
 	  return a;

@@ -4,7 +4,6 @@ package cscie99.team2.lingolearn.client.presenter;
 import cscie99.team2.lingolearn.client.CourseServiceAsync;
 import cscie99.team2.lingolearn.client.UserServiceAsync;
 import cscie99.team2.lingolearn.client.event.ViewCardEvent;
-import cscie99.team2.lingolearn.client.event.ViewCourseEvent;
 import cscie99.team2.lingolearn.client.view.HomeView;
 import cscie99.team2.lingolearn.shared.Course;
 import cscie99.team2.lingolearn.shared.User;
@@ -53,17 +52,6 @@ public class HomePresenter implements Presenter {
     populateUserCourseInfo();
   }
   
-  private class CourseClickHandler implements ClickHandler {
-	  Course course;
-	  public CourseClickHandler(Course course) {
-		  this.course = course;
-	  }
-	@Override
-	public void onClick(ClickEvent event) {
-		eventBus.fireEvent(new ViewCourseEvent(course));
-	} 
-  }
-  
   
   private void populateUserCourseInfo() {
 	  
@@ -83,7 +71,6 @@ public class HomePresenter implements Presenter {
 			  for (int i=0;i<courses.size();i++) {
 				  Course course = courses.get(i);
 				  HasClickHandlers anchor = display.addCourseUserIsInstructing(course);
-				  anchor.addClickHandler(new CourseClickHandler(course));
 			  }
 	      }
 	      
@@ -97,7 +84,6 @@ public class HomePresenter implements Presenter {
 			  for (int i=0;i<courses.size();i++) {
 				  Course course = courses.get(i);
 				  HasClickHandlers anchor = display.addCourseUserIsEnrolledIn(course);
-				  anchor.addClickHandler(new CourseClickHandler(course));
 			  }
 	      }
 	      

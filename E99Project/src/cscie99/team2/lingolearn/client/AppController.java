@@ -2,8 +2,6 @@ package cscie99.team2.lingolearn.client;
 
 import cscie99.team2.lingolearn.client.event.ViewCardEvent;
 import cscie99.team2.lingolearn.client.event.ViewCardEventHandler;
-import cscie99.team2.lingolearn.client.event.ViewCourseEvent;
-import cscie99.team2.lingolearn.client.event.ViewCourseEventHandler;
 import cscie99.team2.lingolearn.client.presenter.CardPresenter;
 import cscie99.team2.lingolearn.client.presenter.CoursePresenter;
 import cscie99.team2.lingolearn.client.presenter.HomePresenter;
@@ -15,7 +13,6 @@ import cscie99.team2.lingolearn.client.view.CardView;
 import cscie99.team2.lingolearn.client.view.CourseView;
 import cscie99.team2.lingolearn.client.view.HomeView;
 import cscie99.team2.lingolearn.client.view.SessionView;
-import cscie99.team2.lingolearn.shared.Course;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -51,25 +48,11 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
             doViewCard();
           }
         });  
-    
-    eventBus.addHandler(ViewCourseEvent.TYPE,
-        new ViewCourseEventHandler() {
-          public void onViewCourse(ViewCourseEvent event) {
-            doViewCourse(event.getCourse());
-          }
-        });  
 
   }
   
   private void doViewCard() {
     History.newItem("viewCard");
-  }
-  
-  private void doViewCourse(Course course) {
-    History.newItem("viewCourse", false);
-    Presenter presenter = new CoursePresenter(courseService, analyticsService, 
-    		eventBus, new CourseView(), course);
-    presenter.go(container);
   }
   
   public void go(final HasWidgets container) {
@@ -99,7 +82,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     	  presenter = new HomePresenter(userService, courseService, 
     			  eventBus, new HomeView());
     	  break;
-      case "viewCourse":
+      case "course":
     	  presenter = new CoursePresenter(courseService, analyticsService, 
     			  eventBus, new CourseView());
     	  break;
@@ -108,7 +91,8 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     			  eventBus, new SessionView());
     	  break;
       case "register":
-    	  presenter = new RegistrationPresenter(userService, eventBus, new AppRegisterView());
+    	  presenter = new RegistrationPresenter(userService, eventBus, 
+    			  new AppRegisterView());
     	  break;
       }
       
