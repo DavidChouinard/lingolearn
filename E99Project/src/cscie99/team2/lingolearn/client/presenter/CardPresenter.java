@@ -55,7 +55,7 @@ public class CardPresenter implements Presenter {
 	      }
 	      
 	      public void onFailure(Throwable caught) {
-	        Window.alert("Error fetching contact details");
+	        Window.alert("Error fetching card.");
 	      }
 	    });
   }

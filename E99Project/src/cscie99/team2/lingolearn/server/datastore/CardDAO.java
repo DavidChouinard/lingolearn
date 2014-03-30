@@ -25,9 +25,57 @@ public class CardDAO {
 		return CardDAOHolder.INSTANCE;
 	}   
 	
-	public Card storeCard( Card card ) {
-		ofy().save().entity(new ObjectifyableCard(card)).now();
-		return card;	
+	/**
+	 * This method stores the Card in the datastore
+	 * @param card Card to be stored in the datastore
+	 * @return card for diagnostic purpose
+	 * @throws CardNotFoundException if the card is duplicate
+	 */
+	public Card storeCard( Card card ) throws CardNotFoundException {
+		if (isCardUnique(card)) {
+			ofy().save().entity(new ObjectifyableCard(card)).now();
+		} else {
+			throw new CardNotFoundException("Duplicate card. It is already in the datastore", "kanji", card.getKanji());
+		}
+		return card;
+	}
+	
+	/**
+	 * Helper method to verify that the card is not already is the datastore.
+	 * 
+	 * Card is considered to be the same with the Card already stored if thier respective
+	 * kanji, hiragana, katakana, translation, description and native language are the same.
+	 *    
+	 * @param card Card
+	 * @return true if this card is not in the datastore 
+	 */
+	private boolean isCardUnique(Card card) { 
+		// First obtain a list of all Cards with the same kanji
+		List<Card> cardList;
+		try {
+			cardList = getAllCardsByKanji(card.getKanji());
+		} catch (CardNotFoundException e) {
+			// There is no any Card stored yet with this kanji, no further checks are needed, proceed with storing
+			return true;
+		}
+		Iterator<Card> it = cardList.iterator();
+		while (it.hasNext()) {
+			Card currCard = it.next();		
+			if ((currCard.getHiragana()+currCard.getKatakana()+currCard.getTranslation()+currCard.getDesc()+currCard.getNativeLanguage())
+					.equalsIgnoreCase			
+					((card.getHiragana()+card.getKatakana())+card.getTranslation()+card.getDesc()+card.getNativeLanguage())) 
+			{
+				return false;
+			}
+		}
+		// Will be considered Unique card, proceed with storing
+		return true;	
+	}
+	
+	public Card getCardById(Long cardId) {
+		ObjectifyableCard oCard = ofy().load().type(ObjectifyableCard.class).id(cardId).now();
+			Card card = oCard.getCard();
+			return card;
 	}
 	
 	/**

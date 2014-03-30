@@ -15,7 +15,7 @@ import cscie99.team2.lingolearn.shared.Image;
 import cscie99.team2.lingolearn.shared.Sound;
 
 /**
- *
+ * This class represents Proxy for Card
  */
 @Entity(name="ObjectifyableCard")
 public class ObjectifyableCard implements Serializable {

@@ -21,6 +21,7 @@ public class OfyService {
 		factory().register(ObjectifyableImage.class);
 		factory().register(ObjectifyableSound.class);
 		factory().register(ObjectifyableUser.class);
+		factory().register(ObjectifyableDeck.class);
 		// factory().register(OtherClass.class);
 	}
 

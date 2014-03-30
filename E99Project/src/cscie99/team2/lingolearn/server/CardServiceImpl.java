@@ -24,6 +24,9 @@ public class CardServiceImpl extends RemoteServiceServlet implements CardService
 	private static final boolean Retrivining = false;
 	CardDAO cardAccessor = CardDAO.getInstance();
 	
+	/**
+	 * Soon to be replaced by real DAO implementation 
+	 */
 	public Card getCardById(Long cardId) {
 		
 		Card c = null;
@@ -49,7 +52,14 @@ public class CardServiceImpl extends RemoteServiceServlet implements CardService
 		myCard.setNativeLanguage("us-en");
 		myCard.setImage(myImage);
 		myCard.setSound(mySound);
-		cardAccessor.storeCard(myCard);
+		
+		try {
+			cardAccessor.storeCard(myCard);
+		} catch (CardNotFoundException myCardNotFoundException) {
+			// TODO Auto-generated catch block
+			// Duplicate card
+			System.err.println(myCardNotFoundException.getMsg() + " for Kanji " + myCardNotFoundException.getSearchParam());
+		}
 		
 		//c = cardAccessor.getCardByKanji("岡");
 		//c = cardAccessor.getCardByDescription("岡");

@@ -144,4 +144,20 @@ public class Deck implements Serializable {
 	public void setNativeLangauge(String nativeLanguage) {
 		this.nativeLangauge = nativeLanguage;
 	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setCards(HashMap<Long, Card> cards) {
+		this.cards = cards;
+	}
+
+	public void setCardIds(List<Long> cardIds) {
+		this.cardIds = cardIds;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
 }
