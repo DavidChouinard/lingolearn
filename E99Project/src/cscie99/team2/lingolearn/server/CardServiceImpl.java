@@ -61,6 +61,27 @@ public class CardServiceImpl extends RemoteServiceServlet implements CardService
 			System.err.println(myCardNotFoundException.getMsg() + " for Kanji " + myCardNotFoundException.getSearchParam());
 		}
 		
+		//The course service is currently mocking data, and these next 
+		// couple of cards help support that.
+		Card c1 = new Card();
+		c1.setKanji("岡");
+		c1.setId((long)1);
+		c1.setEnTranslation("card 1 translation");
+		try {
+			cardAccessor.storeCard(c1);
+		} catch (CardNotFoundException myCardNotFoundException) {
+			//No worries
+		}
+		Card c2 = new Card();
+		c2.setKanji("字");
+		c2.setId((long)2);
+		c2.setEnTranslation("card 2 translation");
+		try {
+			cardAccessor.storeCard(c2);
+		} catch (CardNotFoundException myCardNotFoundException) {
+			//No worries
+		}
+		
 		//c = cardAccessor.getCardByKanji("岡");
 		//c = cardAccessor.getCardByDescription("岡");
 		try {
@@ -69,6 +90,10 @@ public class CardServiceImpl extends RemoteServiceServlet implements CardService
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		c = cardAccessor.getCardById(cardId);
+		
+		 
 		
 		/// Temp. test for userDAO
 		/// Prepopulate

@@ -51,15 +51,23 @@ public class ObjectifyableCard implements Serializable {
 		
 		// Process image
 		Image img = card.getImage();
-		ObjectifyableImage oimg = new ObjectifyableImage(img);
-		ofy().save().entity(oimg).now();
-		this.image = Ref.create(oimg);
+		if (img != null) { 
+			ObjectifyableImage oimg = new ObjectifyableImage(img);
+			ofy().save().entity(oimg).now();
+			this.image = Ref.create(oimg);
+		} else {
+			this.image = null;
+		}
 		
 		// Process sound
 		Sound sound = card.getSound();
-		ObjectifyableSound osound = new ObjectifyableSound(sound);
-		ofy().save().entity(osound).now();
-		this.sound = Ref.create(osound);
+		if (sound != null) {
+			ObjectifyableSound osound = new ObjectifyableSound(sound);
+			ofy().save().entity(osound).now();
+			this.sound = Ref.create(osound);
+		} else {
+			this.sound = null;
+		}
 		
 	}
 	
@@ -78,8 +86,16 @@ public class ObjectifyableCard implements Serializable {
 		c.setTranslation(this.translation);
 		c.setNativeLanguage(this.nativeLanguage);
 		c.setDesc(this.description);
-		c.setImage(this.image.get().getImage());
-		c.setSound(this.sound.get().getSound());
+		if (this.image != null) {
+			c.setImage(this.image.get().getImage());
+		} else {
+			c.setImage(null);
+		}
+		if (this.sound != null) {
+			c.setSound(this.sound.get().getSound());
+		} else {
+			c.setSound(null);
+		}
 		return c;
 	}
 	

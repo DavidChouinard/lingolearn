@@ -30,12 +30,14 @@ public class SessionView extends Composite {
 
   @UiField FlowPanel sessionHeader;
   @UiField FlowPanel cardArea;
-  @UiField FlowPanel controlsArea;
-  @UiField Button nextButton;
+  @UiField FlowPanel knowledgeAssessmentArea;
+  @UiField Button knowledgeLow;
+  @UiField Button knowledgeMedium;
+  @UiField Button knowledgeHigh;
   
   public SessionView() {
 	  initWidget(binder.createAndBindUi(this));
-	  this.showControls();
+	  this.hideKnowledgeAssessmentArea();
   }
   
 
@@ -49,16 +51,24 @@ public class SessionView extends Composite {
 	  return this.cardArea;
   }
   
-  public void hideControls() {
-	  this.controlsArea.setVisible(false);
+  public void showKnowledgeAssessmentArea() {
+	  this.knowledgeAssessmentArea.setVisible(true);
   }
   
-  public void showControls() {
-	  this.controlsArea.setVisible(true);
+  public void hideKnowledgeAssessmentArea() {
+	  this.knowledgeAssessmentArea.setVisible(false);
   }
   
-  public HasClickHandlers getNextButton() {
-	  return nextButton;
+  public HasClickHandlers getKnowledgeLowButton() {
+	  return knowledgeLow;
+  }
+  
+  public HasClickHandlers getKnowledgeMediumButton() {
+	  return knowledgeMedium;
+  }
+  
+  public HasClickHandlers getKnowledgeHighButton() {
+	  return knowledgeHigh;
   }
   
   public Widget asWidget() {

@@ -14,8 +14,10 @@
     
     <g:FlowPanel ui:field='cardArea'></g:FlowPanel>
     
-    <g:FlowPanel ui:field='controlsArea'>
-        <g:Button ui:field='nextButton'>Next</g:Button>
+    <g:FlowPanel ui:field='knowledgeAssessmentArea'>
+        <g:Button ui:field='knowledgeLow'>I had no clue</g:Button>
+        <g:Button ui:field='knowledgeMedium'>I sorta knew it</g:Button>
+        <g:Button ui:field='knowledgeHigh'>I definitely knew it</g:Button>
     </g:FlowPanel>
 
   </g:HTMLPanel>

@@ -2,6 +2,7 @@ package cscie99.team2.lingolearn.client.presenter;
 
 
 import cscie99.team2.lingolearn.client.CardServiceAsync;
+import cscie99.team2.lingolearn.client.event.FlippedCardEvent;
 import cscie99.team2.lingolearn.client.event.ViewCardEvent;
 import cscie99.team2.lingolearn.client.view.CardView;
 import cscie99.team2.lingolearn.shared.Card;
@@ -34,7 +35,7 @@ public class CardPresenter implements Presenter {
     
 	display.getFlipButton().addClickHandler(new ClickHandler() {   
       public void onClick(ClickEvent event) {
-        //eventBus.fireEvent(new ViewCardEvent());
+        eventBus.fireEvent(new FlippedCardEvent());
     	display.flipCard();
       }
     });

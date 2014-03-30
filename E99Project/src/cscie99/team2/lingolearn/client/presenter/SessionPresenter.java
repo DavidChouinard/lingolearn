@@ -6,7 +6,10 @@ import cscie99.team2.lingolearn.client.AnalyticsServiceAsync;
 import cscie99.team2.lingolearn.client.CardService;
 import cscie99.team2.lingolearn.client.CardServiceAsync;
 import cscie99.team2.lingolearn.client.CourseServiceAsync;
+import cscie99.team2.lingolearn.client.event.FlippedCardEvent;
+import cscie99.team2.lingolearn.client.event.FlippedCardEventHandler;
 import cscie99.team2.lingolearn.client.event.ViewCardEvent;
+import cscie99.team2.lingolearn.client.event.ViewCardEventHandler;
 import cscie99.team2.lingolearn.client.view.CardView;
 import cscie99.team2.lingolearn.client.view.CourseView;
 import cscie99.team2.lingolearn.client.view.SessionView;
@@ -53,12 +56,32 @@ public class SessionPresenter implements Presenter {
   }
   
   public void bind() {
-    
-	  display.getNextButton().addClickHandler(new ClickHandler() {   
-	      public void onClick(ClickEvent event) {
-	    	  gotoNextCard();
-	      }
-	    });
+	  
+	  display.getKnowledgeHighButton().addClickHandler(new ClickHandler() {
+		  public void onClick(ClickEvent event) {
+			  recordKnowledge("high");
+		  }
+	  });
+	  
+	  display.getKnowledgeMediumButton().addClickHandler(new ClickHandler() {
+		  public void onClick(ClickEvent event) {
+			  recordKnowledge("medium");
+		  }
+	  });
+	  
+	  display.getKnowledgeLowButton().addClickHandler(new ClickHandler() {
+		  public void onClick(ClickEvent event) {
+			  recordKnowledge("low");
+		  }
+	  });
+	  
+	  eventBus.addHandler(FlippedCardEvent.TYPE,
+        new FlippedCardEventHandler() {
+          public void onFlippedCard(FlippedCardEvent event) {
+              display.showKnowledgeAssessmentArea();
+          }
+        }); 
+	  
   }
   
   public void go(final HasWidgets container) {
@@ -66,8 +89,10 @@ public class SessionPresenter implements Presenter {
     container.clear();
     container.add(display.asWidget());
     
-    //Set session to dummy
-    this.setSession("1");
+    //Set session based on query parameter in URL
+    String sessionId = "session1";
+    sessionId = Window.Location.getParameter("sessionId");
+    this.setSession(sessionId);
   }
   
   /*
@@ -90,13 +115,18 @@ public class SessionPresenter implements Presenter {
 	  });
   }
   
+  private void recordKnowledge(String knowledge) {
+	  //TODO: send knowledge to the course service?
+	  gotoNextCard();
+  }
+  
   private void gotoNextCard() {
 	  cardPresenter.setCardData(session.getDeck().getCardIds().get(currentCardNumber));
 	  currentCardNumber++;
 	  if (currentCardNumber >= session.getDeck().getCardIds().size()) {
 		  currentCardNumber = 0;
 	  }
-	  display.showControls();
+	  display.hideKnowledgeAssessmentArea();
   }
   
 
