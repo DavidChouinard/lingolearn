@@ -3,6 +3,8 @@ package cscie99.team2.lingolearn.server.spacedrepetition;
 import java.util.Collections;
 import java.util.List;
 
+import cscie99.team2.lingolearn.shared.Card;
+import cscie99.team2.lingolearn.shared.error.CardNotFoundException;
 import cscie99.team2.lingolearn.shared.error.SpacedRepetitionException;
 
 /**
@@ -14,7 +16,7 @@ public class BasicRandomization extends SpacedRepetition {
 	private List<Long> shuffledDeck = null;
 	
 	@Override
-	public Long DrawCard() throws SpacedRepetitionException {
+	public Card DrawCard() throws SpacedRepetitionException {
 		// Check for issues with the deck
 		if (deck == null) {
 			throw new SpacedRepetitionException("The deck has not been provided yet.");
@@ -26,7 +28,11 @@ public class BasicRandomization extends SpacedRepetition {
 			throw new SpacedRepetitionException("The deck needs to be reshuffled.");
 		}
 		// Remove and return the first card in the draw deck
-		return shuffledDeck.remove(0);
+		try {
+			return deck.getCard(shuffledDeck.remove(0));
+		} catch (CardNotFoundException ex) {
+			throw new SpacedRepetitionException("An error occured while drawing the card.", ex);
+		}
 	}
 	
 	@Override

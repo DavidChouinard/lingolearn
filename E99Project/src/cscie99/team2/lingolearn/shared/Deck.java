@@ -11,10 +11,7 @@ import cscie99.team2.lingolearn.shared.error.CardNotFoundException;
  * This class represents a deck of the flashcards.
  */
 public class Deck implements Serializable {
-	
-	/**
-	 * 
-	 */
+	// The id to use for the serialization version
 	private static final long serialVersionUID = 1L;
 
 	// The unique id of the deck

@@ -1,5 +1,6 @@
 package cscie99.team2.lingolearn.server.spacedrepetition;
 
+import cscie99.team2.lingolearn.shared.Card;
 import cscie99.team2.lingolearn.shared.error.SpacedRepetitionException;
 
 /**
@@ -13,7 +14,7 @@ public class LeitnerSystem extends SpacedRepetition {
 	}
 
 	@Override
-	public Long DrawCard() throws SpacedRepetitionException {
+	public Card DrawCard() throws SpacedRepetitionException {
 		// TODO Auto-generated method stub
 		return null;
 	}

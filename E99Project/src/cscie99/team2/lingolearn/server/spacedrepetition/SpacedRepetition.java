@@ -1,5 +1,6 @@
 package cscie99.team2.lingolearn.server.spacedrepetition;
 
+import cscie99.team2.lingolearn.shared.Card;
 import cscie99.team2.lingolearn.shared.Deck;
 import cscie99.team2.lingolearn.shared.error.SpacedRepetitionException;
 
@@ -19,7 +20,7 @@ public abstract class SpacedRepetition {
 	 * 
 	 * @return The next card that should be shown to the user.
 	 */
-	public abstract Long DrawCard() throws SpacedRepetitionException;
+	public abstract Card DrawCard() throws SpacedRepetitionException;
 	
 	/**
 	 * Set the deck that should be used by the algorithm.
